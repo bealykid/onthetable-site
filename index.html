@@ -5,77 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On The Table — go / no-go diligence memos for investors</title>
 <meta name="description" content="Six seats read the dated record, argue, and one calibrated verdict survives, with the dissent printed. Decision support, not investment advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1a1a18;
-    --paper: #faf8f3;
-    --rule: #d8d4c8;
-    --dim: #6b675c;
+  :root{
+    --paper:#f6f3ec; --paper-2:#efe9dc; --ink:#1a1815; --ink-soft:#3a352b;
+    --dim:#6b6455; --rule:#d8d0be; --tag-border:#b8ad92; --oxblood:#7a2e2e; --gold:#8a6d2a;
+    --serif:'Source Serif 4',Georgia,serif; --display:'Newsreader',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 17px;
-    line-height: 1.65;
-    padding: 0 24px;
-  }
-  main { max-width: 620px; margin: 0 auto; padding: 72px 0 96px; }
-  header { margin-bottom: 56px; }
-  .masthead {
-    font-size: 13px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 28px;
-  }
-  h1 {
-    font-size: 30px;
-    line-height: 1.3;
-    font-weight: normal;
-    margin-bottom: 18px;
-  }
-  .sell {
-    font-size: 20px;
-    font-style: italic;
-    color: var(--ink);
-  }
-  hr {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 44px 0;
-  }
-  h2 {
-    font-size: 13px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    font-weight: normal;
-    color: var(--dim);
-    margin-bottom: 16px;
-  }
-  p { margin-bottom: 16px; }
-  strong { font-weight: bold; }
-  .verdict {
-    border-left: 3px solid var(--ink);
-    padding: 4px 0 4px 20px;
-    margin: 20px 0;
-  }
-  .verdict p { margin-bottom: 8px; }
-  .small { font-size: 14.5px; color: var(--dim); }
-  a { color: var(--ink); }
-  footer { margin-top: 56px; }
-  footer p { font-size: 14.5px; color: var(--dim); margin-bottom: 8px; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#e8e3d7;color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62;padding:0 16px;}
+  main{max-width:680px;margin:0 auto;background:var(--paper);padding:56px 60px 64px;
+    box-shadow:0 3px 22px rgba(0,0,0,0.12);margin-top:32px;margin-bottom:48px;}
+
+  .mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:40px;}
+  .mast .nm{font-family:var(--display);font-weight:700;letter-spacing:0.16em;font-size:15px;text-transform:uppercase;}
+  .mast .no{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--oxblood);text-transform:uppercase;}
+
+  h1{font-family:var(--display);font-weight:700;font-size:34px;line-height:1.15;letter-spacing:-0.01em;margin-bottom:14px;}
+  .sell{font-family:var(--display);font-style:italic;font-weight:500;font-size:21px;color:var(--ink);}
+
+  .card{display:flex;gap:24px;align-items:flex-start;border:1px solid var(--ink);padding:20px 22px;margin:38px 0;background:var(--paper-2);}
+  .card .num{font-family:var(--display);font-weight:800;font-size:72px;line-height:0.82;letter-spacing:-0.03em;color:var(--oxblood);}
+  .card .num small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--dim);margin-top:8px;}
+  .card .hold{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);}
+  .card .posture{font-family:var(--display);font-weight:700;font-size:26px;color:var(--oxblood);margin:2px 0 10px;line-height:1.05;}
+  .card .tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
+  .card .tag{font-family:var(--mono);font-size:9px;letter-spacing:0.09em;text-transform:uppercase;border:1px solid var(--tag-border);color:var(--dim);padding:3px 8px;}
+  .card .cap{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);}
+
+  hr{border:none;border-top:1px solid var(--rule);margin:40px 0;}
+  h2{font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:var(--gold);margin-bottom:14px;}
+  p{margin-bottom:16px;}
+  strong{font-weight:600;}
+  .verdict{border-left:3px solid var(--gold);background:var(--paper-2);padding:14px 18px;margin:22px 0;font-size:15px;color:var(--ink-soft);}
+  .proof strong{font-family:var(--display);}
+  a{color:var(--oxblood);}
+  footer{margin-top:48px;padding-top:16px;border-top:2px solid var(--ink);}
+  footer p{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--dim);margin-bottom:8px;}
+  @media(max-width:560px){ main{padding:40px 24px 48px;} h1{font-size:27px;} .card{flex-direction:column;gap:12px;} .card .num{font-size:60px;} }
 </style>
 </head>
 <body>
 <main>
 
+  <div class="mast"><span class="nm">On The Table</span><span class="no">Go / No-Go Diligence Memos</span></div>
+
   <header>
-    <div class="masthead">On The Table</div>
     <h1>Go / no-go diligence memos for investors.</h1>
     <p class="sell">Your AI agrees with you. Ours is required to disagree.</p>
   </header>
+
+  <div class="card">
+    <div class="num">75<small>Confidence / 100</small></div>
+    <div>
+      <div class="hold">The Holding</div>
+      <div class="posture">No-Go As Framed</div>
+      <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">second-model audited</span></div>
+      <div class="cap">Sample verdict · Olive AI, Inc. · decided June 30, 2021</div>
+    </div>
+  </div>
 
   <section>
     <h2>The problem</h2>
@@ -88,14 +78,12 @@
     <h2>The method</h2>
     <p>Six seats read the same evidence file independently: the Skeptic, the Growth Partner, the Customer-Truth Advisor, the Operator, the Timing Analyst, and a Red Team assigned against whatever the consensus turns out to be. They cannot see each other's work. Then they argue, on the record, and every seat must name the opposing argument it cannot beat. A managing adjudication weighs the surviving arguments, never the votes.</p>
     <p>Then the memo has to survive an audit it did not write: a second AI from a different company checks every source, every date, and every quote before the memo can ship. Every factual claim carries a link and a date. What survives is not an answer. It is a verdict.</p>
-    <div class="verdict">
-      <p><strong>Every verdict states:</strong> a posture (one of four, from GO to CANNOT READ RESPONSIBLY), a confidence number, the named experiments with kill thresholds that condition it, the strongest surviving argument against it, printed in full, and the two or three observable facts that would change the call.</p>
-    </div>
+    <div class="verdict"><strong>Every verdict states:</strong> a posture (one of four, from GO to CANNOT READ RESPONSIBLY), a confidence number, the named experiments with kill thresholds that condition it, the strongest surviving argument against it, printed in full, and the two or three observable facts that would change the call.</div>
   </section>
 
   <hr>
 
-  <section>
+  <section class="proof">
     <h2>The proof</h2>
     <p><strong>Zoom, decision date January 16, 2017.</strong> The day before Sequoia wired $100 million at a $1 billion valuation, the consensus said video conferencing was solved and crowded. Using only sources dated before that day, 114 of them, linked, the table said GO WITH EXPERIMENTS at confidence 70, and named the one number that decided the case.</p>
     <p><strong>Olive AI, decision date June 30, 2021.</strong> The day before the $400 million round at a $4 billion valuation: NO-GO AS FRAMED at confidence 75, built from 64 dated public sources that all existed before the wire.</p>
@@ -109,8 +97,6 @@
     <p>Name a company you are seriously considering. No NDA, you send us nothing. You get the full memo, built from the dated public record: $2,500, waived for a small number of founding readers in exchange for twenty minutes telling us what is missing.</p>
     <p>Every memo ends with the experiments only insider access can run. Running them is the engagement that follows, if the memo earns it.</p>
   </section>
-
-  <hr>
 
   <footer>
     <p>Memos are decision support, not investment advice. Every decision remains entirely the reader's.</p>
