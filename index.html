@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On The Table — go / no-go diligence memos for investors</title>
 <meta name="description" content="Six seats read the dated record, argue, and one calibrated verdict survives, with the dissent printed. Decision support, not investment advice.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://onthetable.vc/">
+<meta property="og:title" content="On The Table — go / no-go diligence memos for investors">
+<meta property="og:description" content="Your AI agrees with you. Ours is required to disagree. Six seats read the dated record, argue, and one calibrated verdict survives, with the dissent printed.">
+<meta property="og:image" content="https://onthetable.vc/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="On The Table — go / no-go diligence memos for investors">
+<meta name="twitter:description" content="Your AI agrees with you. Ours is required to disagree.">
+<meta name="twitter:image" content="https://onthetable.vc/og.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -42,9 +55,16 @@
   .proof strong{font-family:var(--display);}
   .samples{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
   .samples a{display:block;border:1px solid var(--tag-border);border-radius:3px;padding:13px 16px;text-decoration:none;color:var(--ink);background:var(--paper-2);}
-  .samples a:hover{border-color:var(--oxblood);}
+  .samples a:hover{border-color:var(--ink);}
   .samples a b{font-family:var(--display);font-weight:600;font-size:16px;display:block;margin-bottom:2px;}
   .samples a span{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);}
+  .samples a.s-nogo{border-left:3px solid var(--oxblood);}
+  .samples a.s-goexp{border-left:3px solid var(--gold);}
+  .samples a .pos-nogo{color:var(--oxblood);}
+  .samples a .pos-goexp{color:var(--gold);}
+  .cta{margin-top:22px;}
+  .cta a{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--oxblood);border:1px solid var(--oxblood);padding:11px 16px;display:inline-block;text-decoration:none;}
+  .cta a:hover{background:var(--oxblood);color:var(--paper);}
   a{color:var(--oxblood);}
   footer{margin-top:48px;padding-top:16px;border-top:2px solid var(--ink);}
   footer p{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--dim);margin-bottom:8px;}
@@ -100,8 +120,8 @@
     <h2>See a sample memo</h2>
     <p>Read one end to end: the verdict, the dissent printed in full, and every claim carrying a dated source. Both are method demonstrations, not predictions.</p>
     <div class="samples">
-      <a href="olive-ai.html"><b>Olive AI, Inc.</b><span>No-Go As Framed &middot; 75 &middot; PDF inside</span></a>
-      <a href="zoom.html"><b>Zoom Video Communications</b><span>Go With Experiments &middot; 70 &middot; PDF inside</span></a>
+      <a class="s-nogo" href="olive-ai.html"><b>Olive AI, Inc.</b><span><i class="pos-nogo" style="font-style:normal;">No-Go As Framed</i> &middot; 75 &middot; PDF inside</span></a>
+      <a class="s-goexp" href="zoom.html"><b>Zoom Video Communications</b><span><i class="pos-goexp" style="font-style:normal;">Go With Experiments</i> &middot; 70 &middot; PDF inside</span></a>
     </div>
   </section>
 
@@ -111,6 +131,7 @@
     <h2>The founding reader offer</h2>
     <p>Name a company you are seriously considering. No NDA, you send us nothing. You get the full memo, built from the dated public record: $2,500, waived for a small number of founding readers in exchange for twenty minutes telling us what is missing.</p>
     <p>Every memo ends with the experiments only insider access can run. Running them is the engagement that follows, if the memo earns it.</p>
+    <p class="cta"><a href="mailto:steve@onthetable.vc?subject=Founding%20reader%3A%20a%20company%20to%20put%20on%20the%20table">Name a company &middot; steve@onthetable.vc</a></p>
   </section>
 
   <footer>

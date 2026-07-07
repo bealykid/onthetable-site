@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>og render</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;0,6..72,800;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f3ec; --paper-2:#efe9dc; --ink:#1a1815; --dim:#6b6455;
+    --tag-border:#b8ad92; --oxblood:#7a2e2e; --gold:#8a6d2a;
+    --display:'Newsreader',serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#ffffff;}
+  #og{width:1200px;height:630px;background:var(--paper);padding:56px 64px 48px;display:flex;flex-direction:column;justify-content:space-between;position:absolute;top:0;left:0;}
+  .mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid var(--ink);padding-bottom:14px;}
+  .mast .nm{font-family:var(--display);font-weight:700;letter-spacing:0.18em;font-size:26px;text-transform:uppercase;color:var(--ink);}
+  .mast .no{font-family:var(--mono);font-size:15px;letter-spacing:0.16em;color:var(--oxblood);text-transform:uppercase;}
+  .card{display:flex;gap:44px;align-items:center;border:2px solid var(--ink);padding:38px 44px;background:var(--paper-2);}
+  .num{font-family:var(--display);font-weight:800;font-size:170px;line-height:0.82;letter-spacing:-0.03em;color:var(--oxblood);}
+  .num small{display:block;font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:0.16em;color:var(--dim);margin-top:16px;}
+  .hold{font-family:var(--mono);font-size:17px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);}
+  .posture{font-family:var(--display);font-weight:700;font-size:58px;color:var(--oxblood);margin:6px 0 20px;line-height:1.02;}
+  .tags{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+  .tag{font-family:var(--mono);font-size:14px;letter-spacing:0.09em;text-transform:uppercase;border:1px solid var(--tag-border);color:var(--dim);padding:6px 13px;}
+  .cap{font-family:var(--mono);font-size:14px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);}
+  .foot{display:flex;justify-content:space-between;align-items:baseline;}
+  .sell{font-family:var(--display);font-style:italic;font-weight:500;font-size:33px;color:var(--ink);}
+  .url{font-family:var(--mono);font-size:16px;letter-spacing:0.1em;color:var(--oxblood);}
+</style>
+</head>
+<body>
+<div id="og">
+  <div class="mast"><span class="nm">On The Table</span><span class="no">Go / No-Go Diligence Memos</span></div>
+  <div class="card">
+    <div class="num">75<small>Confidence / 100</small></div>
+    <div>
+      <div class="hold">The Holding</div>
+      <div class="posture">No-Go As Framed</div>
+      <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">second-model audited</span></div>
+      <div class="cap">Sample verdict &middot; Olive AI, Inc. &middot; decided June 30, 2021</div>
+    </div>
+  </div>
+  <div class="foot">
+    <span class="sell">Your AI agrees with you. Ours is required to disagree.</span>
+    <span class="url">onthetable.vc</span>
+  </div>
+</div>
+</body>
+</html>
