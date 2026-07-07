@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On The Table — Olive AI, Inc.</title>
+<style>
+/* ON THE TABLE — brand system v1
+   Direction: Opinion-Dossier spine + Grid big-numeral signature.
+   Single source of truth for the memo renderer and the landing page. */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* paper + ink */
+  --paper:      #f6f3ec;
+  --paper-2:    #efe9dc;
+  --ink:        #1a1815;
+  --ink-soft:   #3a352b;
+  --dim:        #6b6455;
+  --rule:       #d8d0be;
+  --rule-soft:  #e4dccb;
+  --tag-border: #b8ad92;
+
+  /* accents */
+  --oxblood:    #7a2e2e;
+  --gold:       #8a6d2a;
+
+  /* posture colors (one of four) */
+  --go:         #2f5d3a;
+  --go-exp:     #8a6d2a;
+  --nogo:       #7a2e2e;
+  --cannot:     #5a544a;
+
+  /* type */
+  --serif:  'Source Serif 4', Georgia, serif;
+  --display:'Newsreader', Georgia, serif;
+  --mono:   'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* ---------- primitives ---------- */
+.ott-label   { font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--dim); }
+.ott-eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); }
+.ott-rule    { height:2px; background:var(--ink); border:none; }
+.ott-hair    { height:1px; background:var(--rule); border:none; }
+
+/* ---------- masthead ---------- */
+.ott-mast {
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:2px solid var(--ink); padding-bottom:9px;
+}
+.ott-mast .nm { font-family:var(--display); font-weight:700; letter-spacing:0.16em; font-size:15px; text-transform:uppercase; }
+.ott-mast .no { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; color:var(--oxblood); }
+
+/* ---------- case caption (Opinion) ---------- */
+.ott-caption {
+  border:1px solid var(--ink); padding:13px 16px; margin:22px 0 26px;
+  font-family:var(--serif); font-size:13px; line-height:1.55; color:var(--ink-soft);
+}
+.ott-caption .rt   { float:right; font-family:var(--mono); font-size:10px; color:var(--dim); }
+.ott-caption .inre { font-family:var(--display); font-style:italic; font-size:17px; font-weight:600; color:var(--ink); }
+
+/* ---------- verdict card (signature) ---------- */
+.ott-verdict {
+  display:flex; gap:26px; align-items:flex-start;
+  padding:6px 0 24px; border-bottom:1px solid var(--rule); margin-bottom:6px;
+}
+.ott-verdict .num {
+  font-family:var(--display); font-weight:800; font-size:78px; line-height:0.82;
+  letter-spacing:-0.03em; color:var(--posture, var(--nogo));
+}
+.ott-verdict .num small {
+  display:block; font-family:var(--mono); font-size:10px; font-weight:500;
+  letter-spacing:0.16em; color:var(--dim); margin-top:8px;
+}
+.ott-verdict .body { flex:1; }
+.ott-verdict .hold { font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); }
+.ott-verdict .posture {
+  font-family:var(--display); font-weight:700; font-size:30px; line-height:1.05;
+  color:var(--posture, var(--nogo)); margin:3px 0 12px;
+}
+.ott-verdict .tags { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:12px; }
+.ott-verdict .tag {
+  font-family:var(--mono); font-size:9px; letter-spacing:0.09em; text-transform:uppercase;
+  border:1px solid var(--tag-border); color:var(--dim); padding:3px 8px; border-radius:2px;
+}
+.ott-verdict .flip { font-family:var(--serif); font-size:13.5px; font-style:italic; color:var(--ink-soft); line-height:1.5; }
+.ott-verdict .flip b { font-style:normal; font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); }
+
+/* posture color hooks */
+.posture-go     { --posture:var(--go); }
+.posture-go-exp { --posture:var(--go-exp); }
+.posture-nogo   { --posture:var(--nogo); }
+.posture-cannot { --posture:var(--cannot); }
+
+/* ---------- tab nav ---------- */
+.ott-tabs { display:flex; gap:2px; flex-wrap:wrap; border-bottom:2px solid var(--ink); margin:22px 0 0; }
+.ott-tab {
+  font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  padding:10px 15px; color:var(--dim); background:none; border:none; cursor:pointer;
+  border-bottom:2px solid transparent; margin-bottom:-2px;
+}
+.ott-tab:hover { color:var(--ink); }
+.ott-tab.active { color:var(--oxblood); border-bottom-color:var(--oxblood); font-weight:600; }
+.ott-panel { display:none; padding-top:28px; }
+.ott-panel.active { display:block; }
+
+/* ---------- body prose ---------- */
+.ott-prose { font-family:var(--serif); font-size:15px; line-height:1.62; color:var(--ink); }
+.ott-prose h2 {
+  font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--gold); font-weight:600; margin:34px 0 6px;
+}
+.ott-prose h2:first-child { margin-top:0; }
+.ott-prose h3 { font-family:var(--display); font-weight:600; font-size:19px; margin:24px 0 8px; }
+.ott-prose p { margin:0 0 14px; }
+.ott-prose strong { font-weight:600; }
+.ott-prose em { font-style:italic; }
+.ott-prose a { color:var(--oxblood); text-decoration:none; border-bottom:1px solid var(--rule); }
+.ott-prose blockquote {
+  margin:18px 0; padding:14px 18px; background:var(--paper-2);
+  border-left:3px solid var(--gold); font-size:14px; color:var(--ink-soft);
+}
+.ott-prose table { width:100%; border-collapse:collapse; margin:18px 0; font-size:13px; font-family:var(--serif); }
+.ott-prose th { text-align:left; font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); border-bottom:2px solid var(--ink); padding:8px 10px; }
+.ott-prose td { border-bottom:1px solid var(--rule); padding:8px 10px; vertical-align:top; line-height:1.45; }
+.ott-prose ol, .ott-prose ul { margin:0 0 14px; padding-left:22px; }
+.ott-prose li { margin-bottom:7px; }
+
+/* big pull headline (Grid device, reused in prose) */
+.ott-headline { font-family:var(--display); font-weight:700; font-size:23px; line-height:1.18; margin:0 0 16px; letter-spacing:-0.01em; }
+.ott-pivotal  { font-family:var(--display); font-style:italic; font-weight:500; font-size:21px; line-height:1.32; color:var(--ink); margin:0 0 16px; }
+
+/* sources get mono, tighter */
+.ott-sources { font-family:var(--mono); font-size:11px; line-height:1.55; color:var(--ink-soft); }
+.ott-sources a { color:var(--oxblood); word-break:break-all; }
+
+/* ---------- footer ---------- */
+.ott-foot { display:flex; justify-content:space-between; margin-top:30px; padding-top:12px; border-top:2px solid var(--ink);
+  font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--dim); }
+
+body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
+.ott-doc { max-width:720px; margin:0 auto; background:var(--paper); color:var(--ink);
+  padding:48px 56px 40px; box-shadow:0 3px 22px rgba(0,0,0,0.13); border-radius:2px; }
+.ott-topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.05em; }
+.ott-topbar a { text-decoration:none; color:var(--dim); border:1px solid var(--tag-border); padding:6px 12px; border-radius:2px; }
+.ott-topbar a.dl { color:var(--oxblood); border-color:var(--oxblood); }
+.ott-topbar a:hover { background:var(--paper-2); }
+
+/* ---- print / PDF: a real paginated document, not a sliced card ---- */
+@page { size: Letter; margin: 22mm 20mm 20mm; }
+@media print {
+  html, body { background: var(--paper); }
+  body { padding:0; margin:0; }
+  .ott-doc { max-width:none; margin:0; padding:0; background:var(--paper); box-shadow:none; border-radius:0; }
+  .ott-tabs { display:none; }
+  .ott-topbar { display:none; }
+  .ott-panel { display:block !important; padding-top:0; }
+  /* Sources starts fresh; everything else flows continuously */
+  #tab4 { break-before: page; }
+  /* never split these mid-way */
+  .ott-mast, .ott-caption, .ott-verdict { break-inside: avoid; }
+  h2, h3, .ott-secttitle, .ott-headline, .ott-pivotal { break-after: avoid; }
+  tr, li, blockquote { break-inside: avoid; }
+  .ott-foot { break-before: avoid; }
+}
+</style>
+</head><body>
+<article class="ott-doc posture-nogo">
+
+  <div class="ott-topbar">
+    <a class="back" href="/">&larr; onthetable.vc</a>
+    <a class="dl" href="olive-ai.pdf" download>Download PDF &darr;</a>
+  </div>
+
+  <div class="ott-mast"><span class="nm">On The Table</span>
+    <span class="no">MEMO 001 · RETROSPECTIVE / BACKTEST</span></div>
+
+  <div class="ott-caption">
+    <span class="rt">No. 001</span>
+    <span class="inre">In re: Olive AI, Inc.</span><br>
+    Columbus, Ohio · Healthcare workflow automation · Series H · $400M at a $4.0B valuation · Decided June 30, 2021
+  </div>
+
+  <div class="ott-verdict">
+    <div class="num">75<small>Confidence / 100</small></div>
+    <div class="body">
+      <div class="hold">The Holding</div>
+      <div class="posture">No-Go As Framed</div>
+      <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">second-model audited</span></div>
+      <div class="flip"><b>Reverses on</b>&nbsp; net revenue retention of the 2019 hospital cohort, as of Q1 2021.</div>
+    </div>
+  </div>
+
+  <nav class="ott-tabs"><button class="ott-tab active" data-tab="tab0">Verdict</button><button class="ott-tab" data-tab="tab1">Executive Topline</button><button class="ott-tab" data-tab="tab2">The Full Read</button><button class="ott-tab" data-tab="tab3">The Table</button><button class="ott-tab" data-tab="tab4">Sources &amp; Method</button></nav>
+  <div class="ott-panel active ott-prose" id="tab0"><section><h3 class="ott-secttitle">The Verdict</h3><p><strong>NO-GO AS FRAMED. Confidence 75 out of 100.</strong></p>
+<p><strong>The framing does the work, so here it is exactly: an outside participation in the $400 million Series H at a $4.0 billion valuation, closing now, without pre-close inspection rights.</strong> On the dated public record, that price requires a renewing, expanding, reference-able revenue base and a defensible moat. The record documents neither, and its strongest-sourced points (a moat claim with no independent evidence behind it, a hostile platform owner, a value-delivery inversion built from the company's own numbers, and a disclosure posture on current economics with no innocent reading) all cut against the thesis at this price.</p>
+<p><strong>On the minority position, GO WITH EXPERIMENTS, we rule as follows: it is correct for a different buyer than the one in the frame.</strong> The minority's experiments (cohort retention, the revenue base, the KLAS profile, named references) are exactly right, and they are also exactly the contents of a data room an outside participant cannot enter before the round closes. The experiments require the access that participation is supposed to purchase. For an investor holding pre-close inspection rights, GO WITH EXPERIMENTS is the honest posture, and the experiment list is printed above. For everyone else, it collapses into the majority verdict.</p>
+<p><strong>The pivot the evidence points to, for an investor who wants this category without this entry:</strong> the dated record already contains the alternative pattern: automation running inside the EHR with the platform owner's tolerance rather than against it [42], at a fraction of this price, or patience until this company publishes cohort economics at a valuation the honest pool math can carry.</p>
+<p><strong>Here is why we could be wrong.</strong></p>
+<ol>
+<li><strong>The insiders saw what we cannot.</strong> Five sophisticated investor groups re-upped with data-room access, and one of them is the customer class itself [15, 1]. If the private numbers show $200 million or more of retaining, expanding revenue, this memo is wrong about the floor, and everyone who saw the numbers knew it when we could not.</li>
+<li><strong>Our sharpest arithmetic is soft-limbed.</strong> The value inversion is directional, not measured; its components are a marketing aggregate, an unstable count, and one anonymous review. A modest correction to any component weakens it.</li>
+<li><strong>Silence is a weak instrument pointed at this buyer.</strong> Revenue-cycle executives do not post. Some of the quiet is our microphone, not their absence.</li>
+</ol>
+<p><strong>What would change this call.</strong> Three observable facts, any one of which forces this analysis to be redone:</p>
+<ol>
+<li>Disclosed cohort economics: the revenue base behind "plans to triple revenue in 2021," and net revenue retention for the 2019 hospital cohort showing net expansion as of Q1 2021.</li>
+<li>Ten named revenue-cycle executives, on the record, describing production use at contract scale with delivered savings at or above contract price.</li>
+<li>Dated third-party evidence (the gated KLAS profile or equivalent) of a delivered cross-customer data or network effect: proof the product is more than per-site scripting.</li>
+</ol>
+<p>All three together move the posture to GO WITH EXPERIMENTS or better at the right price. None of the three existed in the public record on June 30, 2021, and that sentence is this memo's finding.</p>
+<hr /></section></div><div class="ott-panel ott-prose" id="tab1"><p class="ott-pivotal">Are you buying the network, or are you buying the bot?</p><section><h3 class="ott-secttitle">The Pivotal Question</h3><p><strong>Are you buying the network, or are you buying the bot?</strong></p>
+<p>The founder framed this deal himself, six months before the round. Asked what a hospital gets for its money, Sean Lane said: "you're buying a network; you're not buying a bot... or an automation" [12]. That single sentence carries the whole valuation. A bot company, even a good one, is a services-flavored software vendor in a crowded category, and the category's honest arithmetic (Section 1) cannot support $4 billion. A network company, where every new hospital makes the product smarter for all the others, could grow into that number and beyond.</p>
+<p>So the question this memo has to answer is not whether hospital administration is drowning in cost (it is, and the dated record proves it), and not whether buyers are buying automation (they are, in large numbers). The question is which of the two companies you would own at $4 billion: the one in the founder's sentence, or the one in the dated public record.</p>
+<p>Here is the tension in one paragraph. The company's own claimed value delivery works out to roughly $148,000 per hospital [5, 8], against contracts an insider described as "a couple million" [9]. On stage, in his own words, the founder called the product "robotic process automation" [11]. The dominant hospital software platform listed the company as a restricted vendor [14]. The last revenue number in the company's nine-year public record is "surpassing $10 million" in 2018 [23]; since then, the cited record contains no revenue figure, no annual recurring revenue (ARR), no pricing, and no retention data. And the network the valuation depends on appears in the record only in descriptions that originate with the company.</p>
+<p><strong>You are being asked to pay for the network. The record can only document the bot.</strong></p>
+<hr /></section><section><h3 class="ott-secttitle">Executive Topline</h3><p><strong>Verdict: NO-GO AS FRAMED, confidence 75 out of 100.</strong> As framed means: an outside participation in the $400 million Series H at a $4.0 billion valuation, closing now, without pre-close inspection rights. This verdict is about this entry at this price on this evidence. It is not a claim that the company fails, and the strongest reason it could be wrong is printed in the verdict section under its own heading.</p>
+<p><strong>The price requires an asset the record cannot document.</strong> A $4 billion valuation at conventional forward software multiples implies $200-400 million of revenue (Section 1). The last revenue disclosure in the record is 2018's, "surpassing $10 million" in annual sales on the way into the rebrand [23]. Between that number and this ask sit three years, roughly $415 million of new capital [1], and exactly one public revenue statement: "plans to triple revenue in 2021," base undisclosed [5]. For a nine-year-old company, the silence on current economics is itself a datapoint: these numbers exist, and someone has decided you should not see them.</p>
+<p><strong>The strongest-sourced facts in the file all point the same direction.</strong> The moat claim is company-originated everywhere it appears in the record [12, 15, 50], with no independent or customer-validated evidence found, while the platform owner it depends on treats the company as an adversary [14]. The company's own best-foot-forward value claim inverts against its own contract sizes [5, 8, 9]. The buyer is nearly missing from the customer story: two named customer voices in five years of coverage, both in vendor-friendly settings, one of them announcing a deployment not yet delivered [54, 5]. And the graveyard of healthcare automation (Section 2) shows how this pattern has ended when claimed ROI met delivered ROI at renewal.</p>
+<p><strong>The wave is real, which is not the same as this boat.</strong> Digital health capital set records in Q1 2021 [56], two thirds of health systems were already buying revenue-cycle automation (billing-and-collections software) by mid-2020 [20], and tier-one firms funded Olive's direct competitors in the same half [42, 43]. Right wave, record temperature. But a favorable wave prices the entry and funds the field, and this entry consumes most of the honestly modeled market before the competition is counted.</p>
+<p><strong>Why we could be wrong, in one line:</strong> the investors who saw the real numbers kept writing checks, and one of them was the customer class itself, a health system's own venture arm [15].</p>
+<p><strong>What would change this call, in one number:</strong> net revenue retention of the 2019 hospital cohort as of Q1 2021 (whether the hospitals signed by 2019 spend more or less now than they did then, the one number that separates renewing revenue from resold churn). Everything else in this memo is the long way of asking for that number.</p>
+<hr /></section><section><h3 class="ott-secttitle">The Thesis, Stated Fairly</h3><p>Before the case against, the case for, at its strongest. This is the version of the deal a smart advocate would put on the table, and none of it is invented; every piece is dated and real.</p>
+<p><strong>The problem is enormous and newly funded.</strong> United States healthcare carries roughly $372 billion a year in administrative complexity [17]. Hospitals entered 2021 off a year the American Hospital Association scored at $323 billion in losses [19], which converts administrative cost-cutting from a nice-to-have into survival. By mid-2020, more than two thirds of health systems were already using or implementing revenue-cycle automation [20]. The buyers are buying.</p>
+<p><strong>Olive is the capitalized leader in the wedge.</strong> Roughly 600 claimed hospital customers including 22% of the top 100 health systems [4], $448 million raised from Khosla Ventures, Drive Capital, General Catalyst, and Tiger Global [1, 3, 22], and the December 2020 Verata acquisition adding prior-authorization AI (automating the insurer sign-off required before care is delivered) on both the provider and payer side of the transaction [18, 6]. Nobody else in the field held that combination of distribution claims, capital, and two-sided ambition at once.</p>
+<p><strong>The founder is a survivor with a documented kill process.</strong> Lane kept the company alive through a near-death 2017, discarded 27 or 28 products at a stated cost of $30 million in testing [7, 24, 47], and recruited name-brand executives through 2020 [1]. That is not a tourist. And the single most unusual signal in the file: Ascension Ventures, the venture arm of one of the largest health systems in the country, is an investor [15]. The customer class itself put money in.</p>
+<p><strong>The prize, if the network claim is true, is a toll position.</strong> If 600-plus hospitals plus Verata's payer-side entry really do become the rail that prior authorization clears through, Olive owns the highest-friction transaction in American healthcare, and the pattern-matchers who priced it as RPA will have missed the wedge.</p>
+<p>That is the bull case, stated without a wink. What follows is what the dated record does to it.</p>
+<hr /></section></div><div class="ott-panel ott-prose" id="tab2"><section><h3 class="ott-secttitle">1. Market sizing, with the math shown</h3><p><strong>The company's numbers are a vision statement and a misread citation.</strong> Olive's boilerplate promises to "unleash a trillion dollars by connecting healthcare" [5]. For prior authorization specifically, the company and its coverage repeat "$31 billion per year" [18, 6]. That figure traces to a 2009 Health Affairs study measuring what physician practices spend interacting with health plans in total: billing, formularies, credentialing, everything [16]. It was twelve years old at decision date, measured the physician side rather than the hospital automation slice, and was never a number about this product's lane.</p>
+<p><strong>The independent, current number existed, and it is far smaller.</strong> The CAQH 2020 Index, published months before the round, found that of $372 billion in administrative complexity, $122 billion in savings had already been captured by existing automation, leaving <strong>$16.3 billion a year in remaining savings from fully automating nine common transaction types, across the entire industry, providers and payers, all vendors combined</strong> [17]. Per transaction, the remaining savings are small money: $11.71 per automated claims-status inquiry, $9.64 per prior authorization [17].</p>
+<p><strong>Modeled honestly, the entire vendor pool is $3 billion to $8 billion a year, all vendors combined (our arithmetic, assumptions stated).</strong> If buyers pay vendors 20 to 50 percent of realized savings (a modeled assumption; no dated pricing benchmark exists in the record, a stated gap), that is the entire software pool implied by CAQH, split across providers and payers and contested by UiPath, R1, Waystar, AKASA, electronic health record (EHR) vendors, and services firms (Section 3). Label the bands: base $3B, likely $5B, stretch $8B. That is the reachable market, as distinct from the trillion-dollar vision (the fantasy total addressable market) and the $16.3 billion savings pool (the serviceable market it is carved from).</p>
+<p><strong>The valuation math requires $200-400 million of revenue the record cannot show.</strong> At a conventional 10-20x forward revenue multiple, a $4 billion price implies exactly that range. The last disclosed revenue marker is 2018's "surpassing $10 million" in annual sales [23]; to carry this valuation from there, revenue had to grow 20-40x in three years, and the only public statement since is "plans to triple revenue in 2021," base undisclosed [5]. Meanwhile the company's own claimed value delivery, "over $100 million in repeatable, ongoing efficiencies" across 675 hospitals [5], works out to roughly $148,000 per hospital, arithmetic first done contemporaneously by the industry publication HIStalk [8]. Hold that number; it returns in Section 5.</p>
+<p><strong>The demand side is stressed, which cuts both ways.</strong> Hospitals lost $323 billion in 2020 [19]. Cost pressure creates urgency to automate, and it also creates buyers with no money, renewal committees with sharp pencils, and a preference for vendors who can prove delivered savings rather than promise them.</p>
+<hr /></section><section><h3 class="ott-secttitle">2. The Graveyard</h3><p><strong>Healthcare operations automation is a category with a well-populated cemetery, and the pattern of death is consistent: the gap between claimed and delivered ROI, opened by integration reality.</strong> Prior attempts at roughly this idea, from the dated record:</p>
+<table>
+<thead>
+<tr>
+<th>Prior attempt</th>
+<th>Peak</th>
+<th>Cause of death or stall</th>
+<th>Source, date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CrossChx identity business (Olive's own prior self)</strong></td>
+<td>$35M+ raised; 100+ hospitals live on SafeChx</td>
+<td>Abandoned. The company shed every product it had built; headcount roughly halved from 120 (2016) to about 60 (spring 2017); 28 products churned in five years</td>
+<td>[22, 23, 24]</td>
+</tr>
+<tr>
+<td>IBM Watson Health (hospital AI at scale)</td>
+<td>~$1B revenue unit</td>
+<td>MD Anderson benched it after $62M with goals unmet (2017); internal documents showed "unsafe and incorrect" recommendations (2018); by February 2021, four months before this decision date, IBM was reportedly exploring a sale of the unprofitable unit</td>
+<td>[25, 26, 27, 28]</td>
+</tr>
+<tr>
+<td>Cerner RevWorks (an EHR giant's revenue-cycle services arm)</td>
+<td>Major-EHR distribution</td>
+<td>Divested for $30M in working capital; KLAS survey work in June 2019 found more than 70% of clients would not use it again</td>
+<td>[29, 30]</td>
+</tr>
+<tr>
+<td>Accretive Health (revenue-cycle outsourcing)</td>
+<td>Public company</td>
+<td>$2.5M settlement and a Minnesota ban over collection practices; survives today as R1</td>
+<td>[31]</td>
+</tr>
+<tr>
+<td>PokitDok (healthcare transactions API)</td>
+<td>Venture-backed, ~8 years</td>
+<td>Asset sale to Change Healthcare, price undisclosed</td>
+<td>[32]</td>
+</tr>
+<tr>
+<td>HealthSpot (health kiosks, same metro as Olive)</td>
+<td>~$50M raised</td>
+<td>Chapter 7; $1.1M total revenue in three years; assets sold for $1.15M</td>
+<td>[33]</td>
+</tr>
+<tr>
+<td>RPA, the category itself</td>
+<td>Global enterprise trend</td>
+<td>EY estimated 30-50% of initial RPA projects fail (2016); Forbes ran "The Big RPA Bubble" (2018)</td>
+<td>[34, 35]</td>
+</tr>
+<tr>
+<td>Vendor-claim inflation, nine days before this decision date</td>
+<td>Epic's sepsis model, deployed at hundreds of hospitals</td>
+<td>External validation in JAMA Internal Medicine: actual performance far below vendor-reported (AUC 0.63 vs claimed 0.76-0.83); missed two thirds of sepsis cases</td>
+<td>[36]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The most instructive grave in this yard belongs to the subject company.</strong> Olive is not a fresh entrant; it is CrossChx, which raised a Khosla-led Series B as a biometric patient-identity company with its software live in more than 100 hospitals [22], then abandoned that deployed, distributed product entirely and rebranded around an AI "digital employee" with a $32.8 million Series D in mid-2018 [23, 62]. Whatever else the 600-hospital claim means, this founder has held hospital distribution before and walked away from it.</p>
+<p><strong>What, honestly, is different this time?</strong> From the dated record: the capital. Olive raised $385 million in 2020 alone [1], a pace with no precedent in its own history. The underlying technology claim is not different: "Olive One is robotic process automation," in the founder's own words on stage in 2018 [11], and "screen-scraping and macros" in the industry press five months before the round [13]. The graveyard is full of exactly this class of technology sold at exactly this pitch. More money, faster, into the same pattern is a bet that this much capital rewrites the pattern's ending.</p>
+<hr /></section><section><h3 class="ott-secttitle">3. Competitors, incumbents, and the moat question</h3><p><strong>This is not greenfield. The wedge was a crowded, contested purchase before the round.</strong> At decision date, dated sources put the following in or around Olive's lane: UiPath, freshly public with $607.6 million in FY21 revenue growing 81% across roughly 8,000 customers, healthcare named as a growth vertical in its S-1, its IPO filing [37]; Automation Anywhere, $290 million raised at a $6.8 billion valuation with healthcare a named vertical [38]; R1 RCM, $1.27 billion in FY2020 revenue and GAAP-profitable, at scale in exactly Olive's buyer set and absorbing Cerner's RevWorks book [39, 30]; Waystar, private-equity backed and acquiring prior-authorization AI (Digitize.AI in 2019, eSolutions in 2020) [41, 40]; AKASA, a $60 million Series B led by BOND with a16z participating, selling automation that runs inside the existing EHR rather than as a separate platform [42]; and Infinitus, Kleiner- and Coatue-backed voice automation for payer phone calls [43]. Above all of them, Optum and Change Healthcare were combining the largest claims dataset in the country into the largest payer-owned services arm, a $13 billion deal pending at cutoff and drawing a Department of Justice second request, the in-depth antitrust review [44, 45].</p>
+<p><strong>The platform owner is not neutral, and Olive's approach lives on its screens.</strong> A copy of Epic's restricted-vendor list circulating among Epic analysts in May 2021 names "CrossChx, Inc. dba Olive" [14]. The industry press described Olive's technical approach contemporaneously as "screen-scraping and macros" [13]. Screen-scraping breaks when the platform owner changes the screens, and this platform owner had classified the company as a vendor to restrict, not to partner with, before the round was announced.</p>
+<p><strong>The claimed moat is company-originated everywhere it appears.</strong> "You're buying a network; you're not buying a bot" [12]. The record does contain company- and founder-described network mechanics, relayed through trade press and interviews: an initiative described as tapping collective customer data [15], and a second company built "on top of Olive's AI platform" [50]. What we searched for and did not find is any independent, inspectable, customer-validated evidence of those network effects operating in the delivered product. <strong>In the cited record: none. That is a stated gap, and at this price it is the most expensive gap in the file.</strong></p>
+<p><strong>The killer question: what does Olive own that UiPath, R1, and Epic cannot replicate?</strong> When UiPath prices healthcare seats down from IPO scale, when R1 bundles automation into services contracts it already holds, and when Epic ships native automation on screens it controls, the dated record contains no answer beyond the founder's sentence.</p>
+<hr /></section><section><h3 class="ott-secttitle">4. The founder-market-fit read</h3><p><strong>The generous read is real, and it should be made without a wink.</strong> Sean Lane kept this company alive through a near-death 2017 in which headcount roughly halved [23]. The kill-process narrative is disciplined and dated: 27 or 28 products discarded, roughly $30 million spent testing them, before landing on Olive [7, 24, 47]. He has repeatedly persuaded top-tier investors to fund the next version: Khosla, Drive, General Catalyst, Tiger [22, 3, 1]. He recruited name-brand executives through late 2020 [1], tripled headcount in thirteen months [5], and built recruiting magnetism around a fully-distributed model the company called The Grid [5]. And Ascension Ventures, a health system's own venture arm, is on the cap table [15]: the rarest founder signal in the file, the customer class investing in its own vendor.</p>
+<p><strong>The blunt read is also dated, and it is unusually specific.</strong> Four items:</p>
+<p><strong>No healthcare operating history appears in the pre-cutoff biographies in the cited record.</strong> Lane's background is Air Force and NSA intelligence, then Baltimore startups [7]. The stated bridge from intelligence work to healthcare was identity resolution: "Bad Guy A could be the same as Bad Guy B" [46]. Nine years in, the public bios we can check still contained no healthcare operations experience.</p>
+<p><strong>No named product or engineering chief appears anywhere in the cited public record.</strong> The executive team announced in February 2021 names sales, marketing, finance, and medical leadership [5]. For a company asking $4 billion on the strength of an AI platform, the absence of an identifiable technical chief in the public record is strange, and it is the kind of strange a data room resolves in five minutes, which makes its public absence louder.</p>
+<p><strong>The founder took a second CEO job four months before the round.</strong> In February 2021 Lane raised $50 million for Circulo, a Medicaid insurtech, and became its chief executive while remaining Olive's, with Circulo built "on top of Olive's AI platform" [49, 50]. A founder running two venture-scale companies simultaneously is a dated, verifiable fact at decision time, and it bears directly on the execution risk of the harder company.</p>
+<p><strong>Claim hygiene drifts under light pressure.</strong> The hospital count was 500 in September 2019 [59]; then 400 [6], 675 [5], and 700 [7] appear within nine weeks of each other across the winter of 2020-21, and the February 2021 release is itself headlined "600 Hospitals" while claiming 675 in the body [5, 8]. The discarded-product count is 27 or 28 depending on the telling [7, 24]. None of these is damning alone; together they describe a company whose public numbers are directional rather than audited, which matters when every load-bearing number in the thesis is a public claim.</p>
+<p><strong>Co-founder history rhymes with the product history.</strong> Brad Mascho, the co-founder, left in late 2017 [48], in what later profile writing called "an apparent cloud of exhaustion" [47]. The two acquisitions of the growth story (Verata in December 2020, Empiric Health in April 2021) point in different directions: one deepens the prior-authorization wedge [18], the other opens surgical analytics, a different buyer and workflow [51], five months apart, while the founder also ran a second company.</p>
+<hr /></section><section><h3 class="ott-secttitle">5. Unit economics and retention</h3><p><strong>What the record contains on current economics: nothing.</strong> The last revenue figure anyone disclosed is "surpassing $10 million" in annual sales, in 2018, at the rebrand [23]. Since then: no revenue or ARR figure, no pricing, no churn or cohort data, across three years and roughly $415 million of new capital [1]. The only revenue statement in the fundraising window is "plans to triple revenue in 2021," base undisclosed [5]. At a $4 billion ask, we treat the silence on current unit economics as itself a datapoint, and an adverse one: companies this old and this funded have these numbers, and this one publishes hospital counts almost weekly while declining to publish a single current dollar figure.</p>
+<p><strong>What can be built from dated fragments points one direction.</strong> The company's own claimed value delivery: "over $100 million in repeatable, ongoing efficiencies" across 675 hospitals, roughly $148,000 per hospital [5, 8]. Against that, an insider's description of contract sizes: "a couple million in contracts," with sales commissions of 6 to 8 percent on top [9]. If both numbers are even roughly right, many customers were paying seven figures for six-figure delivered value. The company sold against that gap with a "5X ROI guarantee" tied to performance-based contracting [10], and a guarantee is a liability when delivery underruns; the RevWorks row of the graveyard shows what more than 70% of clients declining to rebuy looks like at renewal [29].</p>
+<blockquote>
+<p><strong>The hedge this arithmetic travels with.</strong> The $148K figure is a marketing aggregate divided by an unstable denominator: the hospital count moved 400, 675, 700 within nine weeks [6, 5, 7], and the contract figure is one anonymous employee review from 2019 [9]. This inversion is directional evidence, not a measurement. The direction is still adverse, because the numerator is the company's own best foot forward.</p>
+</blockquote>
+<p><strong>Delivery is consultant-shaped, and the transactions are small.</strong> Traditional automation in this category "typically require[s] consultants to shadow employees to document workflows," and 35% or more of revenue-cycle deployments ran 3-6+ months late, per a 350-CFO survey fielded across the winter of the round [52]. The remaining savings per transaction are $11.71 (claims status) and $9.64 (prior authorization) [17]. Software margins at "AI workforce" prices require either enormous verified transaction volume or services-heavy delivery. Nothing in the record verifies the volume.</p>
+<p><strong>The growth story is partly purchased, and the product surface kept widening while it was told.</strong> $120 million of the story arrived with Verata, with integration promises quantified in advance: 40% reduction in write-offs, 80% faster turnarounds [6]. A second acquisition followed within five months into a different buyer and workflow [51], while a free "AI sidekick" product line was announced alongside the core platform [61]. Buyer-side tool sprawl was already real: 30% of hospitals using revenue-cycle automation needed two or more vendors to manage it [21].</p>
+<blockquote>
+<p><strong>The assumption the entire thesis depends on: that claimed hospital logos represent renewing, expanding, reference-able revenue rather than pilots.</strong> The buyer-voice record, next section, bears directly on it and cannot confirm it. The Table Deliberates returns to this assumption, because every seat at it ended up there.</p>
+</blockquote>
+<hr /></section><section><h3 class="ott-secttitle">6. What the buyer actually says</h3><p><strong>The loudest finding is silence, and we weigh it carefully.</strong> Queries of the available Reddit archive for "Olive AI" across the pre-cutoff period return essentially no discussion by revenue-cycle workers, billers, coders, HIM directors, or hospital IT staff, and the health-IT subreddit's comment archive returned nothing matching the vendor [57]. For a product marketed as an AI workforce working beside staff in 600-plus hospitals, the worker communities we could search show no sign of it. We hold this finding loosely: revenue-cycle directors are not forum-native buyers, the archive is a partial mirror, and the queries are not fully reproducible (see Limits). This is a limited search result, not a census, and silence alone would be a footnote.</p>
+<p><strong>It is not alone. Where real industry voice exists in-window, it is skeptical, and it is specific.</strong> HIStalk is the industry's own watering hole, and five months before the round a reader asked, in public: "You don't usually take on a vendor unless their [sic] is snake oil involved. What gives with this firm?" The editor's answer, in part: the company "sold check-in kiosks and patient matching solutions under their previous name CrossChx through 2018, then sold that business off to focus on an abandoned internal project that used screen-scraping and macros... It's up to the customer to figure out if it offers more than just the usual scripting tool" [13].</p>
+<p><strong>The buyer this sale runs on had already been named in public.</strong> A reader had done it months earlier: "Who is the buyer of Olive? Managers... susceptible to buzzword-based initiatives... It's like how scammers leave typos in their emails, they only want to catch the dumb ones" [53]. The confusion that sale runs on was measured contemporaneously: 58.8% of health-system leaders considered robotic process automation to be a form of artificial intelligence [60]. And a commenter on the milestone coverage described the model as: "Sell clients on a hypothetical 5-year ROI... Unload the company... We are the ones who will be holding the bag" [13].</p>
+<p><strong>Employee voice, where it survives, matches.</strong> From the one recoverable pre-cutoff capture of the company's Glassdoor page: "Claim to have an AI product however it's not actually AI at all.. Deception at every level" (2019); "Product is ambiguous and after months of being there, I've never been able to use it myself" (engineer, 2018) [9].</p>
+<p><strong>The named-buyer record is two quotes in five years, both in vendor-friendly settings.</strong> One is a Yale New Haven VP in a vendor-friendly funding story, whose framing kept the people central ("our people are the pivotal component" [54]) rather than echoing the vendor's replace-the-workforce pitch. The other is a CFO quote inside Olive's own 600-hospital milestone release [5], and its content matters: "excited to partner with Olive to deploy their AI workforce" is a signing announcement for a deployment not yet delivered, not a results reference. Every other quote in that release is the CEO [5]. So across 675 claimed hospitals and five years of coverage, the dated record contains no named buyer describing delivered results at scale. Revealed demand elsewhere ran the other way: VCU Health laid off 635 people and outsourced its revenue cycle to a human-services firm, not to automation [55].</p>
+<p><strong>Fairness note.</strong> Category-level stated demand was real and independently documented: research affiliated with KLAS, the healthcare industry's customer-satisfaction research firm, found revenue cycle the area "most in need of disruption and innovation" [53], and health-system automation adoption was majority-level by mid-2020 [20]. The buyers want the category. The dated record just cannot find them wanting this vendor.</p>
+<hr /></section><section><h3 class="ott-secttitle">7. Demand and timing</h3><p><strong>For the category, the timing read is favorable, and we say so plainly.</strong> Record digital-health capital: $6.7 billion in Q1 2021 across 25 mega-rounds [56]. Majority adoption of revenue-cycle automation by mid-2020 [20]. Tier-one venture firms funding Olive's direct competitors in the same half-year [42, 43]. Pandemic losses making administrative cost-cutting existential [19]. Not too early: buyers are buying. Not too late: the modeled pool (Section 1) is unsaturated.</p>
+<p><strong>The same evidence cuts back on this deal specifically.</strong> A favorable wave means the wedge is contested from below by funded startups [42, 43], from above by UiPath at IPO scale with healthcare named in its S-1 [37], and sideways by R1, Waystar, and the pending Optum-Change consolidation of the data layer itself [39, 40, 44]. Meanwhile Olive's own capital velocity is a dated fact about market temperature: $51 million in April 2020 [3], $106 million in September [4], $225.5 million at $1.5 billion in December [1, 2], and a $400 million ask at $4 billion seven months later, with no revenue milestone disclosed between them in the cited record. On the public conversation record, attention without scrutiny: pre-cutoff chatter about Olive is uniformly promotional (funding, hiring, hometown pride), including the company's venture backer amplifying a plan to hire 1,000 people in a year on June 30, 2021, the decision date itself [64]. That same day, Olive's traveling bus was at Tufts Medical Center handing out ice cream as the hospital's "official AI partner" [63].</p>
+<p><strong>The timing verdict: RIGHT, and priced.</strong> The wave is real and it is now. A right wave at record temperature also prices the entry, and this entry consumes most of a modeled $3-8 billion all-vendor pool before a single competitor is subtracted. Timing is the best fact in this deal, and it is fully reflected in the ask.</p>
+<hr /></section></div><div class="ott-panel ott-prose" id="tab3"><section><h3 class="ott-secttitle">The Table Deliberates</h3><p>Six seats read the same evidence record independently, each with a different mandate, then argued. Their positions, before and after the argument:</p>
+<table>
+<thead>
+<tr>
+<th>Seat</th>
+<th>The question they own</th>
+<th>Position</th>
+<th>Confidence (independent → after deliberation)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The Skeptic</td>
+<td>Where does this die?</td>
+<td>NO-GO AS FRAMED</td>
+<td>82 → 78</td>
+</tr>
+<tr>
+<td>The Growth Partner</td>
+<td>Does the math work?</td>
+<td>NO-GO AS FRAMED</td>
+<td>82 → 80</td>
+</tr>
+<tr>
+<td>The Customer-Truth Advisor</td>
+<td>Do people want this?</td>
+<td>NO-GO AS FRAMED</td>
+<td>78 → 75</td>
+</tr>
+<tr>
+<td>The Operator</td>
+<td>What would make this huge?</td>
+<td>GO WITH EXPERIMENTS</td>
+<td>55 → 48</td>
+</tr>
+<tr>
+<td>The Timing Analyst</td>
+<td>Is the wave real, and is it now?</td>
+<td>NO-GO AS FRAMED</td>
+<td>78 → 75</td>
+</tr>
+<tr>
+<td>The Red Team</td>
+<td>What is this room missing?</td>
+<td>GO WITH EXPERIMENTS</td>
+<td>35 → 30</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Four seats converged, independently, on the same load-bearing assumption.</strong> Without access to each other's work, the Skeptic, the Growth Partner, the Customer-Truth Advisor, and the Operator each identified the identical hinge: whether the 600-plus hospital logo count represents renewing, expanding, reference-able revenue rather than pilots. When four different mandates arrive at the same sentence, that sentence is the deal.</p>
+<p><strong>No seat changed its verdict in the argument, and every seat lowered its confidence.</strong> The concessions were real on both sides, and three exchanges decided the memo.</p>
+<p><strong>First: the Red Team landed the sharpest attack in the file, against the bears' favorite arithmetic.</strong> The renewal-death math ($148K delivered value against seven-figure contracts) is a marketing numerator divided by a denominator the record itself calls unstable, priced against a single anonymous 2019 review. "That is pattern-matching wearing arithmetic." The attack succeeded: this memo carries that arithmetic as directional evidence with its hedge printed beside it (Section 5), not as a measurement. What the attack could not do is reverse the direction, because the numerator is the company's own best-foot-forward claim.</p>
+<p><strong>Second: the Operator conceded the math and kept his verdict.</strong> The table's designated optimist, whose bull case is the prior-authorization toll position, said plainly that he could not refute the value inversion: "both sides of the inversion are dated and nothing on my side is... I cannot argue with a number by pointing at logos. My upside case assumes exactly what this argument attacks." His GO WITH EXPERIMENTS survived, but conditioned on evidence he acknowledged the record does not contain: cohort revenue, retention by vintage, ten named revenue-cycle references out of the lead investor's data room.</p>
+<p><strong>Third: every bearish seat conceded the same point, which is why the verdict's confidence is 75 and not 85.</strong> Vista leads this round with data-room access no outside reader has. Khosla, Drive, General Catalyst, and Tiger re-upped across multiple rounds with real access [22, 3, 1]. Ascension Ventures is the customer class investing its own money [15]. As the Skeptic put it: "Nothing dated lets me distinguish 'the numbers are damning' from 'the numbers are merely private.'" The Customer-Truth Advisor, whose entire framework is that dollars are revealed demand, called the Ascension check "the one genuine revealed-demand signal in the file."</p>
+<p><strong>And the Red Team, arguing its own counter-case, conceded the point that ends the argument.</strong> Its defense of the disclosure gap had been that the gap is the outside world's problem, not Vista's. Under pressure it withdrew the comfort: "That answer relocates my ignorance, it does not cure it. A company this old and this funded has these numbers, and choosing silence at a $4B ask while publishing hospital counts almost weekly is a choice I cannot explain innocently on this record."</p>
+<p><strong>Where the table finally disagrees is not evidence. It is burden of proof.</strong> The minority says: the tests are cheap and specified, so demand them before saying no. The majority says: at this price, from a company this mature, withheld numbers read as adverse, so the default is no until the numbers appear. Both positions want the same four things: 2019 cohort net revenue retention, the revenue base behind "triple in 2021," the gated KLAS profile, and ten named revenue-cycle references. The verdict below resolves the disagreement on a practical fact rather than a philosophical one.</p>
+<hr /></section></div><div class="ott-panel ott-prose" id="tab4"><section><h3 class="ott-secttitle">The Limits of an Outside-In Read</h3><p>This memo is built entirely from the dated public record, and the reader should know exactly where that record is thin.</p>
+<p><strong>KLAS is the biggest gap.</strong> A KLAS Emerging Technology Spotlight on Olive (September 2019) and the RPA category reports exist pre-cutoff [58], and their contents are paywalled. We cite their existence, not their contents. If the KLAS record were opened and showed satisfied production customers at scale, it would bear directly on the load-bearing assumption.</p>
+<p><strong>Employee sentiment goes dark after September 2019.</strong> Exactly one pre-cutoff archive capture of the company's Glassdoor page exists [9]. Anything employees said in 2020-2021 is unrecoverable within this memo's dating rules.</p>
+<p><strong>The social record is partial and not fully reproducible.</strong> The Reddit archive is a partial mirror with known coverage gaps, and it rate-limits re-queries, so the silence finding is a limited search result rather than a census [57]. Coverage of X is thin, and Olive-specific skepticism searches there came back empty, which may reflect coverage rather than absence. LinkedIn is unrecoverable in datable form.</p>
+<p><strong>No current revenue, pricing, or retention disclosure exists in the record after the 2018 "surpassing $10 million" marker [23].</strong> Every unit-economics statement in this memo about the company as it stands at the decision date is therefore modeled from proxies (CAQH transaction values, M&amp;A price anchors, the company's own claims) and labeled as such. The record can bound the ceiling of this business. It cannot see the floor. An investor with data-room access is not similarly limited, which is both this memo's central caveat and, given what the company chose to publish instead, part of its central finding.</p>
+<p><strong>Epic's side of the story is one datapoint.</strong> The restricted-vendor list [14] establishes posture, not roadmap. What Epic planned to build natively, and when, is not in the record.</p>
+<hr /></section><section><h3 class="ott-secttitle">A note on method</h3><p>Six seats with distinct mandates (the Skeptic, the Growth Partner, the Customer-Truth Advisor, the Operator, the Timing Analyst, and a Red Team assigned against whatever consensus emerged) read the same evidence file independently, committed to written positions with confidence numbers, then argued: each seat was required to attack the strongest opposing argument with dated evidence and to name the strongest opposing argument it could not refute. A managing adjudication then weighed the surviving arguments, never the vote count. Every factual claim in this memo carries a source and a date; no source postdates June 30, 2021; undated material was excluded by rule. This memo is decision support, not investment advice, and the verdict is calibrated deliberately: provocative on diagnosis, humble on prescription.</p>
+<hr /></section><section class="ott-sources"><h3 class="ott-secttitle">Sources</h3><p>All sources predate the decision date of 2021-06-30, except archive-query URLs, which were executed later over content dated within the window. Access dates and archive captures noted where relevant.</p>
+<ol>
+<li>PR Newswire, "Olive Attracts Additional $225.5MM Investment to Fast-Track AI Workforce for Healthcare," 2020-12-01. https://www.prnewswire.com/news-releases/olive-attracts-additional-225-5mm-investment-to-fast-track-ai-workforce-for-healthcare-301182069.html</li>
+<li>Bloomberg, "Hospital Software Maker Olive AI Reaches $1.5 Billion Value," 2020-12-01. https://www.bloomberg.com/news/articles/2020-12-01/hospital-software-maker-olive-ai-reaches-1-5-billion-value</li>
+<li>TechCrunch, "Olive, a startup developing an automation tool for healthcare administration, raises $51 million," 2020-04-01. https://techcrunch.com/2020/04/01/olive-a-startup-developing-an-automation-tool-for-healthcare-administration-raises-51-million/</li>
+<li>PR Newswire, "Olive Adds $106MM to Transform Healthcare Payments with AI Workforce," 2020-09-17. https://www.prnewswire.com/news-releases/olive-adds-106mm-to-transform-healthcare-payments-with-ai-workforce-301132804.html</li>
+<li>PR Newswire, "Olive's Internet of Healthcare Reduces Operational Burden at 600 Hospitals," 2021-02-01. https://www.prnewswire.com/news-releases/olives-internet-of-healthcare-reduces-operational-burden-at-600-hospitals-301218382.html</li>
+<li>Star Tribune, "Minneapolis-based Verata Health bought for $120M," 2020-12-06. https://www.startribune.com/minneapolis-based-verata-health-bought-for-120m/573295271</li>
+<li>Johns Hopkins Technology Ventures, Sean Lane profile, 2021-01-18. https://ventures.jhu.edu/news/cdhx-startups-digital-health-sean-lane-olive/</li>
+<li>HIStalk, "News 2/3/21," 2021-02-02. https://histalk2.com/2021/02/02/news-2-3-21/</li>
+<li>Glassdoor reviews of Olive via Internet Archive Wayback Machine, capture 2019-09-21 (reviews dated 2018-11-14, 2019-07-23, 2019-08-29). https://web.archive.org/web/20190921174101/https://www.glassdoor.com/Reviews/Olive-Reviews-E1011139.htm</li>
+<li>Nanalyze, "Olive: Using AI and RPA in Healthcare," 2020-12-07, cited via pre-cutoff Wayback capture of 2021-01-27 (the live page later added a post-cutoff update). https://web.archive.org/web/20210127000000/https://www.nanalyze.com/2020/12/ai-olive-rpa-healthcare/</li>
+<li>YouTube, "Sean Lane on AI automating healthcare workflows, ApplySci @ MIT" (at 07:37: "Olive One is robotic process automation"), 2018-10-23. https://www.youtube.com/watch?v=I9ECHCY0RKs</li>
+<li>YouTube, WTF Health, "Olive CEO Sean Lane on 2020's Big Numbers" (at 13:12: "you're buying a network; you're not buying a bot"), 2020-12-22. https://www.youtube.com/watch?v=1pDiLWjIYVU</li>
+<li>HIStalk, "Monday Morning Update 2/1/21," 2021-01-31. https://histalk2.com/2021/01/31/monday-morning-update-2-1-21/</li>
+<li>Reddit, r/epicsystems, comment reproducing Epic's restricted-vendor list naming "CrossChx, Inc. dba Olive," 2021-05-14. https://www.reddit.com/r/epicsystems/comments/naq28e/epic_noncompete_length/gy51dd7/</li>
+<li>HIStalk, "Monday Morning Update 9/21/20" (Olive $106M raise; "One of its investors is Ascension Ventures"), 2020-09-20. https://histalk2.com/2020/09/20/monday-morning-update-9-21-20/</li>
+<li>Casalino LP et al., "What Does It Cost Physician Practices to Interact With Health Insurance Plans?", Health Affairs, 2009-05-14. https://www.healthaffairs.org/doi/10.1377/hlthaff.28.4.w533</li>
+<li>PR Newswire, "CAQH 2020 Index: Automating Healthcare Administrative Transactions Has Reduced Annual Costs by $122 Billion; $16.3 Billion More Can Be Saved Through Further Automation," 2021-02-03. https://www.prnewswire.com/news-releases/caqh-2020-index-automating-healthcare-administrative-transactions-has-reduced-annual-costs-by-122-billion-16-3-billion-more-can-be-saved-through-further-automation-301221658.html</li>
+<li>PR Newswire, "Olive Acquires Verata Health to Accelerate Artificial Intelligence Technology for Healthcare Providers and Payers," 2020-12-03. https://www.prnewswire.com/news-releases/olive-acquires-verata-health-to-accelerate-artificial-intelligence-technology-for-healthcare-providers-and-payers-301185294.html</li>
+<li>American Hospital Association, "New AHA Report: Losses Deepen for Hospitals and Health Systems," 2020-06-30. https://www.aha.org/press-releases/2020-06-30-new-aha-report-losses-deepen-hospitals-health-systems</li>
+<li>PR Newswire, "More Than 66% of Health Systems and Hospitals Use Automation Tools for Revenue Cycle Operations, According to Survey" (HFMA/Alpha Health, n=587, fielded May 19 to June 22, 2020), 2020-10-08. https://www.prnewswire.com/news-releases/more-than-66-of-health-systems-and-hospitals-use-automation-tools-for-revenue-cycle-operations-according-to-survey-301148505.html</li>
+<li>PR Newswire, "30% of Hospitals and Health Systems Using Revenue Cycle Automation Require Two or More Vendors to Manage the Process," 2021-01-26. https://www.prnewswire.com/news-releases/30-of-hospitals-and-health-systems-using-revenue-cycle-automation-require-two-or-more-vendors-to-manage-the-process-301214856.html</li>
+<li>Business Wire, CrossChx $15M Series B led by Khosla Ventures (SafeChx "deployed in more than 100 hospitals"), 2015-04-14. https://www.businesswire.com/news/home/20150414005291/en/</li>
+<li>TechOhio excerpt of Columbus Business First (Carrie Ghose), "After jagged path from CrossChx to Olive, tech startup founder Sean Lane more confident than ever" ("five-year path to surpassing $10 million revenue and raising $33 million"; excerpt page dated 2018-10-10, page footer states original publication October 9; original gated at bizjournals; both candidate dates pre-cutoff). https://weare.techohio.ohio.gov/2018/10/10/after-jagged-path-from-crosschx-to-olive-tech-startup-founder-sean-lane-more-confident-than-ever/</li>
+<li>Columbus CEO, "Does CrossChx's Sean Lane have the answer?" (28 products in five years), 2018-02-05. https://www.columbusceo.com/story/business/briefs/2018/02/05/does-crosschx-s-sean-lane/15304549007/</li>
+<li>Forbes (Matthew Herper), "MD Anderson Benches IBM Watson in Setback for Artificial Intelligence in Medicine," 2017-02-19. https://www.forbes.com/sites/matthewherper/2017/02/19/md-anderson-benches-ibm-watson-in-setback-for-artificial-intelligence-in-medicine/</li>
+<li>STAT, "IBM pitched its Watson supercomputer as a revolution in cancer care. It's nowhere close," 2017-09-05. https://www.statnews.com/2017/09/05/watson-ibm-cancer/</li>
+<li>Healthcare Dive, "STAT: IBM's Watson gave 'unsafe and incorrect' cancer treatment advice," 2018-07. https://www.healthcaredive.com/news/stat-ibms-watson-gave-unsafe-and-incorrect-cancer-treatment-advice/528666/</li>
+<li>SiliconANGLE, "IBM reportedly mulling spinoff of $1B Watson Health unit," 2021-02-19. https://siliconangle.com/2021/02/19/ibm-reportedly-mulling-spinoff-1b-watson-health-unit/</li>
+<li>Healthcare Dive, "Cerner sells troubled revenue cycle management arm for $30M" (KLAS: &gt;70% of clients wouldn't use RevWorks again), 2020-06. https://www.healthcaredive.com/news/cerner-sells-troubled-revenue-cycle-management-arm-for-30m/579145/</li>
+<li>Fierce Healthcare, "R1 RCM buys Cerner's revenue cycle business in $30M deal," 2020-06. https://www.fiercehealthcare.com/tech/r1-rcm-buys-cerner-s-revenue-cycle-business-30m-deal</li>
+<li>Modern Healthcare, "Accretive exits Minnesota" ($2.5M settlement, state ban), 2012-08-04. https://www.modernhealthcare.com/article/20120804/MAGAZINE/308049948/accretive-exits-minnesota</li>
+<li>PR Newswire, "Change Healthcare Acquires PokitDok Assets," 2018-12-18. https://www.prnewswire.com/news-releases/change-healthcare-acquires-pokitdok-assets-300768002.html</li>
+<li>MedCity News, "Telemedicine kiosk maker HealthSpot shuts down" ($1.1M revenue in three years), 2016-01. https://medcitynews.com/2016/01/telemedicine-kiosk-maker-healthspot-shuts-down/</li>
+<li>EY, "Get ready for robots" (30-50% of initial RPA projects fail), 2016-11. https://eyfs.ie/wp-content/uploads/2016/11/ey-get-ready-for-robots.pdf</li>
+<li>Forbes, "The Big RPA Bubble," 2018-12-02. https://www.forbes.com/sites/cognitiveworld/2018/12/02/the-big-rpa-bubble/</li>
+<li>Wong A et al., "External Validation of a Widely Implemented Proprietary Sepsis Prediction Model in Hospitalized Patients," JAMA Internal Medicine, via PubMed, 2021-06-21. https://pubmed.ncbi.nlm.nih.gov/34152360/</li>
+<li>UiPath, Inc., Form S-1, U.S. Securities and Exchange Commission, 2021-03-26. https://www.sec.gov/Archives/edgar/data/0001734722/000119312521094920/d98556ds1.htm</li>
+<li>VentureBeat, "RPA startup Automation Anywhere raises $290 million at a $6.8 billion valuation," 2019-11. https://venturebeat.com/ai/rpa-startup-automation-anywhere-raises-290-million-at-a-6-8-billion-valuation</li>
+<li>R1 RCM, fourth quarter and full year 2020 results, SEC 8-K exhibit, 2021-02-18. https://www.sec.gov/Archives/edgar/data/0001472595/000162828021002415/a2020pressrelease.htm</li>
+<li>Francisco Partners, "Waystar to Acquire eSolutions, an Industry Leader in Revenue Cycle, Medicare Analytics," 2020-08-12. https://www.franciscopartners.com/media/waystar-to-acquire-esolutions-an-industry-leader-in-revenue-cycle-medicare-analytics</li>
+<li>Waystar, "Waystar Acquires Digitize.AI to Automate Prior Authorization," 2019-08-13. https://www.waystar.com/news/waystar-acquires-digitize-ai-to-automate-prior-authorization/</li>
+<li>PR Newswire, "AKASA Raises $60 Million in Series B Round" (led by BOND, with Andreessen Horowitz), 2021-03-23. https://www.prnewswire.com/news-releases/akasa-raises-60-million-in-series-b-round-301253593.html</li>
+<li>TechCrunch, "Infinitus emerges from stealth with $21M for voice RPA aimed at healthcare companies," 2021-02-04. https://techcrunch.com/2021/02/04/infinitus-emerges-from-stealth-with-21m-for-voice-rpa-aimed-at-healthcare-companies/</li>
+<li>UnitedHealth Group, "OptumInsight and Change Healthcare Combine," 2021-01-06. https://www.unitedhealthgroup.com/newsroom/2021/2021-01-06-optuminsight-and-change-healthcare-combine.html</li>
+<li>Healthcare Finance News, "DOJ investigating UnitedHealth's $13B acquisition of Change" (second request), 2021-03. https://www.healthcarefinancenews.com/news/doj-investigating-unitedhealths-13b-acquisition-change</li>
+<li>Columbus CEO, "Innovation Spotlight: CrossChx takes aim at healthcare problems," 2015-09. https://www.columbusceo.com/content/stories/2015/09/innovation-spotlight-crosschx-takes-aim-at-healthcare-problems.html</li>
+<li>TechCrunch (Connie Loizos), "Talking product-market fit with Sean Lane, whose company tore through 28 products to become a unicorn," 2021-03-16. https://techcrunch.com/2021/03/16/talking-product-market-fit-with-sean-lane-whose-company-tore-through-28-products-to-become-a-unicorn/</li>
+<li>Business Wire, NCI Information Systems appointment of Brad Mascho, 2018-01-30. https://www.businesswire.com/news/home/20180130005541/en/</li>
+<li>PR Newswire, "New Columbus, Ohio Insurtech Company Circulo Raises $50M to Disrupt Medicaid," 2021-02-19. https://www.prnewswire.com/news-releases/new-columbus-ohio-insurtech-company-circulo-raises-50m-to-disrupt-medicaid-301231146.html</li>
+<li>The Health Care Blog, "The Medicaid Plan of the Future: Sean Lane on Building Circulo on Top of Olive's AI Platform," 2021-04-01. https://thehealthcareblog.com/blog/2021/04/01/the-medicaid-plan-of-the-future-sean-lane-on-building-circulo-on-top-of-olives-ai-platform/</li>
+<li>PR Newswire, "Olive Enters the Operating Room with Empiric Health Acquisition," 2021-04-13. https://www.prnewswire.com/news-releases/olive-enters-the-operating-room-with-empiric-health-acquisition-301267114.html</li>
+<li>PR Newswire, "Nearly 75% of Health Systems Report Active Technology Deployments in Revenue Cycle Operations During Pandemic" (AKASA/HFMA survey of 350+ CFOs; 35%+ delays; consultants shadowing employees), 2021-04-29. https://www.prnewswire.com/news-releases/nearly-75-of-health-systems-report-active-technology-deployments-in-revenue-cycle-operations-during-pandemic-301280095.html</li>
+<li>HIStalk, "News 10/21/20" ("Who is the buyer of Olive? Managers..."; CCM/KLAS: revenue cycle "most in need of disruption and innovation"), 2020-10-20. https://histalk2.com/2020/10/20/news-10-21-20/</li>
+<li>Fierce Healthcare via Internet Archive Wayback Machine, "Yale New Haven, Centura Health working with AI company Olive to tackle administrative burdens," article 2019-09-26, capture 2019-09-27. https://web.archive.org/web/20190927020303/https://www.fiercehealthcare.com/tech/yale-new-haven-centura-health-working-ai-company-olive-to-tackle-administrative-burdens</li>
+<li>HIStalk, "News 12/4/20" (VCU Health lays off 635, outsources revenue cycle to Ensemble Health Partners), 2020-12-03. https://histalk2.com/2020/12/03/news-12-4-20/</li>
+<li>Rock Health, "Q1 2021 digital health funding report: digital health is all grown up," 2021-04. https://rockhealth.com/insights/q1-2021-funding-report-digital-health-is-all-grown-up/</li>
+<li>PullPush Reddit archive (a partial mirror with known coverage gaps; rate-limits re-queries, so results have limited reproducibility), queries for "Olive AI" (submissions) and "Olive" in r/healthIT (comments), date-bounded to content before 2021-07-01; queries executed 2026-07-02. https://api.pullpush.io/reddit/search/submission/?q=%22Olive%20AI%22&amp;before=1625097600 and https://api.pullpush.io/reddit/search/comment/?q=Olive&amp;subreddit=healthIT&amp;before=1625097600</li>
+<li>KLAS Research, "Robotic Process Automation 2021: Adoption Moving Mainstream" (report page; contents gated), 2021-01-31. https://klasresearch.com/report/robotic-process-automation-2021-adoption-moving-mainstream/1642</li>
+<li>Fierce Healthcare, "Olive, healthcare automation AI, scores $5M funding from Drive Capital" (500 hospital customers in 41 states; $72.8M raised to date), 2019-09-26. https://www.fiercehealthcare.com/tech/olive-healthcare-automation-ai-scores-5m-funding-from-drive-capital</li>
+<li>PR Newswire, "Confusion Between Artificial Intelligence (AI) and Robotic Process Automation (RPA) High Among Healthcare Leaders" (58.8% conflate RPA with AI), 2020-12-10. https://www.prnewswire.com/news-releases/confusion-between-artificial-intelligence-ai-and-robotic-process-automation-rpa-high-among-healthcare-leaders-301190247.html</li>
+<li>PR Newswire, "New AI Platform to Work Hand in Hand with Healthcare Workers" (Olive Helps launch), 2020-10-12. https://www.prnewswire.com/news-releases/new-ai-platform-to-work-hand-in-hand-with-healthcare-workers-301149896.html</li>
+<li>VentureBeat, "Olive (f.k.a. CrossChx) closes $32.8 million Series D financing," 2018-07-30. https://venturebeat.com/2018/07/30/olive-f-k-a-crosschx-closes-32-8-million-series-d-financing</li>
+<li>Tufts Medical Center on X ("The Olive traveling bus is at #TuftsMC today... Our official #AI partner also handed out ice cream to staff"), 2021-06-30. https://x.com/TuftsMedicalCtr/status/1410266062092914689</li>
+<li>Drive Capital on X ("@oliveai__ plans to hire 1,000 employees in a year"), 2021-06-30. https://x.com/drivecapital/status/1410266671651168257</li>
+</ol></section></div>
+
+  <div class="ott-foot"><span>Decision support · not investment advice</span>
+    <span>On The Table · onthetable.vc</span></div>
+</article>
+<script>
+document.querySelectorAll('.ott-tab').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.ott-tab').forEach(function(x){x.classList.remove('active');});
+    document.querySelectorAll('.ott-panel').forEach(function(x){x.classList.remove('active');});
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+</script>
+</body></html>
