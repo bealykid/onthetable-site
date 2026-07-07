@@ -91,17 +91,27 @@
 .posture-nogo   { --posture:var(--nogo); }
 .posture-cannot { --posture:var(--cannot); }
 
-/* ---------- tab nav ---------- */
-.ott-tabs { display:flex; gap:2px; flex-wrap:wrap; border-bottom:2px solid var(--ink); margin:22px 0 0; }
+/* ---------- chapters nav ---------- */
+.ott-chapters-label { font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--dim); margin:26px 0 11px; }
+.ott-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0; }
 .ott-tab {
-  font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
-  padding:10px 15px; color:var(--dim); background:none; border:none; cursor:pointer;
-  border-bottom:2px solid transparent; margin-bottom:-2px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase;
+  padding:9px 13px; color:var(--ink-soft); background:var(--paper-2);
+  border:1px solid var(--tag-border); border-radius:3px; cursor:pointer;
+  display:inline-flex; align-items:baseline; gap:7px;
 }
-.ott-tab:hover { color:var(--ink); }
-.ott-tab.active { color:var(--oxblood); border-bottom-color:var(--oxblood); font-weight:600; }
+.ott-tab .n { color:var(--gold); font-weight:600; }
+.ott-tab:hover { border-color:var(--oxblood); color:var(--ink); }
+.ott-tab.active { color:#fff; background:var(--oxblood); border-color:var(--oxblood); }
+.ott-tab.active .n { color:rgba(255,255,255,0.72); }
 .ott-panel { display:none; padding-top:28px; }
 .ott-panel.active { display:block; }
+.ott-next {
+  display:inline-block; margin-top:32px; font-family:var(--mono); font-size:11px; letter-spacing:0.05em;
+  color:var(--oxblood); text-decoration:none; border:1px solid var(--oxblood); border-radius:3px;
+  padding:10px 15px; cursor:pointer;
+}
+.ott-next:hover { background:var(--oxblood); color:#fff; }
 
 /* ---------- body prose ---------- */
 .ott-prose { font-family:var(--serif); font-size:15px; line-height:1.62; color:var(--ink); }
@@ -152,7 +162,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
   html, body { background: var(--paper); }
   body { padding:0; margin:0; }
   .ott-doc { max-width:none; margin:0; padding:0; background:var(--paper); box-shadow:none; border-radius:0; }
-  .ott-tabs { display:none; }
+  .ott-tabs, .ott-chapters-label, .ott-next { display:none; }
   .ott-topbar { display:none; }
   .ott-panel { display:block !important; padding-top:0; }
   /* Sources starts fresh; everything else flows continuously */
@@ -191,7 +201,8 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
     </div>
   </div>
 
-  <nav class="ott-tabs"><button class="ott-tab active" data-tab="tab0">Verdict</button><button class="ott-tab" data-tab="tab1">Executive Topline</button><button class="ott-tab" data-tab="tab2">The Full Read</button><button class="ott-tab" data-tab="tab3">The Table</button><button class="ott-tab" data-tab="tab4">Sources &amp; Method</button></nav>
+  <div class="ott-chapters-label">The memo, in 5 chapters. Click any to jump.</div>
+  <nav class="ott-tabs"><button class="ott-tab active" data-tab="tab0"><span class="n">01</span>Verdict</button><button class="ott-tab" data-tab="tab1"><span class="n">02</span>Executive Topline</button><button class="ott-tab" data-tab="tab2"><span class="n">03</span>The Full Read</button><button class="ott-tab" data-tab="tab3"><span class="n">04</span>The Table</button><button class="ott-tab" data-tab="tab4"><span class="n">05</span>Sources &amp; Method</button></nav>
   <div class="ott-panel active ott-prose" id="tab0"><section><h3 class="ott-secttitle">The Verdict</h3><p><strong>NO-GO AS FRAMED. Confidence 75 out of 100.</strong></p>
 <p><strong>The framing does the work, so here it is exactly: an outside participation in the $400 million Series H at a $4.0 billion valuation, closing now, without pre-close inspection rights.</strong> On the dated public record, that price requires a renewing, expanding, reference-able revenue base and a defensible moat. The record documents neither, and its strongest-sourced points (a moat claim with no independent evidence behind it, a hostile platform owner, a value-delivery inversion built from the company's own numbers, and a disclosure posture on current economics with no innocent reading) all cut against the thesis at this price.</p>
 <p><strong>On the minority position, GO WITH EXPERIMENTS, we rule as follows: it is correct for a different buyer than the one in the frame.</strong> The minority's experiments (cohort retention, the revenue base, the KLAS profile, named references) are exactly right, and they are also exactly the contents of a data room an outside participant cannot enter before the round closes. The experiments require the access that participation is supposed to purchase. For an investor holding pre-close inspection rights, GO WITH EXPERIMENTS is the honest posture, and the experiment list is printed above. For everyone else, it collapses into the majority verdict.</p>
@@ -209,7 +220,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <li>Dated third-party evidence (the gated KLAS profile or equivalent) of a delivered cross-customer data or network effect: proof the product is more than per-site scripting.</li>
 </ol>
 <p>All three together move the posture to GO WITH EXPERIMENTS or better at the right price. None of the three existed in the public record on June 30, 2021, and that sentence is this memo's finding.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab1"><p class="ott-pivotal">Are you buying the network, or are you buying the bot?</p><section><h3 class="ott-secttitle">The Pivotal Question</h3><p><strong>Are you buying the network, or are you buying the bot?</strong></p>
+<hr /></section><a class="ott-next" data-tab="tab1">Next chapter &rarr; 02 &nbsp;Executive Topline</a></div><div class="ott-panel ott-prose" id="tab1"><p class="ott-pivotal">Are you buying the network, or are you buying the bot?</p><section><h3 class="ott-secttitle">The Pivotal Question</h3><p><strong>Are you buying the network, or are you buying the bot?</strong></p>
 <p>The founder framed this deal himself, six months before the round. Asked what a hospital gets for its money, Sean Lane said: "you're buying a network; you're not buying a bot... or an automation" [12]. That single sentence carries the whole valuation. A bot company, even a good one, is a services-flavored software vendor in a crowded category, and the category's honest arithmetic (Section 1) cannot support $4 billion. A network company, where every new hospital makes the product smarter for all the others, could grow into that number and beyond.</p>
 <p>So the question this memo has to answer is not whether hospital administration is drowning in cost (it is, and the dated record proves it), and not whether buyers are buying automation (they are, in large numbers). The question is which of the two companies you would own at $4 billion: the one in the founder's sentence, or the one in the dated public record.</p>
 <p>Here is the tension in one paragraph. The company's own claimed value delivery works out to roughly $148,000 per hospital [5, 8], against contracts an insider described as "a couple million" [9]. On stage, in his own words, the founder called the product "robotic process automation" [11]. The dominant hospital software platform listed the company as a restricted vendor [14]. The last revenue number in the company's nine-year public record is "surpassing $10 million" in 2018 [23]; since then, the cited record contains no revenue figure, no annual recurring revenue (ARR), no pricing, and no retention data. And the network the valuation depends on appears in the record only in descriptions that originate with the company.</p>
@@ -226,7 +237,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <p><strong>The founder is a survivor with a documented kill process.</strong> Lane kept the company alive through a near-death 2017, discarded 27 or 28 products at a stated cost of $30 million in testing [7, 24, 47], and recruited name-brand executives through 2020 [1]. That is not a tourist. And the single most unusual signal in the file: Ascension Ventures, the venture arm of one of the largest health systems in the country, is an investor [15]. The customer class itself put money in.</p>
 <p><strong>The prize, if the network claim is true, is a toll position.</strong> If 600-plus hospitals plus Verata's payer-side entry really do become the rail that prior authorization clears through, Olive owns the highest-friction transaction in American healthcare, and the pattern-matchers who priced it as RPA will have missed the wedge.</p>
 <p>That is the bull case, stated without a wink. What follows is what the dated record does to it.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab2"><section><h3 class="ott-secttitle">1. Market sizing, with the math shown</h3><p><strong>The company's numbers are a vision statement and a misread citation.</strong> Olive's boilerplate promises to "unleash a trillion dollars by connecting healthcare" [5]. For prior authorization specifically, the company and its coverage repeat "$31 billion per year" [18, 6]. That figure traces to a 2009 Health Affairs study measuring what physician practices spend interacting with health plans in total: billing, formularies, credentialing, everything [16]. It was twelve years old at decision date, measured the physician side rather than the hospital automation slice, and was never a number about this product's lane.</p>
+<hr /></section><a class="ott-next" data-tab="tab2">Next chapter &rarr; 03 &nbsp;The Full Read</a></div><div class="ott-panel ott-prose" id="tab2"><section><h3 class="ott-secttitle">1. Market sizing, with the math shown</h3><p><strong>The company's numbers are a vision statement and a misread citation.</strong> Olive's boilerplate promises to "unleash a trillion dollars by connecting healthcare" [5]. For prior authorization specifically, the company and its coverage repeat "$31 billion per year" [18, 6]. That figure traces to a 2009 Health Affairs study measuring what physician practices spend interacting with health plans in total: billing, formularies, credentialing, everything [16]. It was twelve years old at decision date, measured the physician side rather than the hospital automation slice, and was never a number about this product's lane.</p>
 <p><strong>The independent, current number existed, and it is far smaller.</strong> The CAQH 2020 Index, published months before the round, found that of $372 billion in administrative complexity, $122 billion in savings had already been captured by existing automation, leaving <strong>$16.3 billion a year in remaining savings from fully automating nine common transaction types, across the entire industry, providers and payers, all vendors combined</strong> [17]. Per transaction, the remaining savings are small money: $11.71 per automated claims-status inquiry, $9.64 per prior authorization [17].</p>
 <p><strong>Modeled honestly, the entire vendor pool is $3 billion to $8 billion a year, all vendors combined (our arithmetic, assumptions stated).</strong> If buyers pay vendors 20 to 50 percent of realized savings (a modeled assumption; no dated pricing benchmark exists in the record, a stated gap), that is the entire software pool implied by CAQH, split across providers and payers and contested by UiPath, R1, Waystar, AKASA, electronic health record (EHR) vendors, and services firms (Section 3). Label the bands: base $3B, likely $5B, stretch $8B. That is the reachable market, as distinct from the trillion-dollar vision (the fantasy total addressable market) and the $16.3 billion savings pool (the serviceable market it is carved from).</p>
 <p><strong>The valuation math requires $200-400 million of revenue the record cannot show.</strong> At a conventional 10-20x forward revenue multiple, a $4 billion price implies exactly that range. The last disclosed revenue marker is 2018's "surpassing $10 million" in annual sales [23]; to carry this valuation from there, revenue had to grow 20-40x in three years, and the only public statement since is "plans to triple revenue in 2021," base undisclosed [5]. Meanwhile the company's own claimed value delivery, "over $100 million in repeatable, ongoing efficiencies" across 675 hospitals [5], works out to roughly $148,000 per hospital, arithmetic first done contemporaneously by the industry publication HIStalk [8]. Hold that number; it returns in Section 5.</p>
@@ -324,7 +335,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <hr /></section><section><h3 class="ott-secttitle">7. Demand and timing</h3><p><strong>For the category, the timing read is favorable, and we say so plainly.</strong> Record digital-health capital: $6.7 billion in Q1 2021 across 25 mega-rounds [56]. Majority adoption of revenue-cycle automation by mid-2020 [20]. Tier-one venture firms funding Olive's direct competitors in the same half-year [42, 43]. Pandemic losses making administrative cost-cutting existential [19]. Not too early: buyers are buying. Not too late: the modeled pool (Section 1) is unsaturated.</p>
 <p><strong>The same evidence cuts back on this deal specifically.</strong> A favorable wave means the wedge is contested from below by funded startups [42, 43], from above by UiPath at IPO scale with healthcare named in its S-1 [37], and sideways by R1, Waystar, and the pending Optum-Change consolidation of the data layer itself [39, 40, 44]. Meanwhile Olive's own capital velocity is a dated fact about market temperature: $51 million in April 2020 [3], $106 million in September [4], $225.5 million at $1.5 billion in December [1, 2], and a $400 million ask at $4 billion seven months later, with no revenue milestone disclosed between them in the cited record. On the public conversation record, attention without scrutiny: pre-cutoff chatter about Olive is uniformly promotional (funding, hiring, hometown pride), including the company's venture backer amplifying a plan to hire 1,000 people in a year on June 30, 2021, the decision date itself [64]. That same day, Olive's traveling bus was at Tufts Medical Center handing out ice cream as the hospital's "official AI partner" [63].</p>
 <p><strong>The timing verdict: RIGHT, and priced.</strong> The wave is real and it is now. A right wave at record temperature also prices the entry, and this entry consumes most of a modeled $3-8 billion all-vendor pool before a single competitor is subtracted. Timing is the best fact in this deal, and it is fully reflected in the ask.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab3"><section><h3 class="ott-secttitle">The Table Deliberates</h3><p>Six seats read the same evidence record independently, each with a different mandate, then argued. Their positions, before and after the argument:</p>
+<hr /></section><a class="ott-next" data-tab="tab3">Next chapter &rarr; 04 &nbsp;The Table</a></div><div class="ott-panel ott-prose" id="tab3"><section><h3 class="ott-secttitle">The Table Deliberates</h3><p>Six seats read the same evidence record independently, each with a different mandate, then argued. Their positions, before and after the argument:</p>
 <table>
 <thead>
 <tr>
@@ -380,7 +391,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <p><strong>Third: every bearish seat conceded the same point, which is why the verdict's confidence is 75 and not 85.</strong> Vista leads this round with data-room access no outside reader has. Khosla, Drive, General Catalyst, and Tiger re-upped across multiple rounds with real access [22, 3, 1]. Ascension Ventures is the customer class investing its own money [15]. As the Skeptic put it: "Nothing dated lets me distinguish 'the numbers are damning' from 'the numbers are merely private.'" The Customer-Truth Advisor, whose entire framework is that dollars are revealed demand, called the Ascension check "the one genuine revealed-demand signal in the file."</p>
 <p><strong>And the Red Team, arguing its own counter-case, conceded the point that ends the argument.</strong> Its defense of the disclosure gap had been that the gap is the outside world's problem, not Vista's. Under pressure it withdrew the comfort: "That answer relocates my ignorance, it does not cure it. A company this old and this funded has these numbers, and choosing silence at a $4B ask while publishing hospital counts almost weekly is a choice I cannot explain innocently on this record."</p>
 <p><strong>Where the table finally disagrees is not evidence. It is burden of proof.</strong> The minority says: the tests are cheap and specified, so demand them before saying no. The majority says: at this price, from a company this mature, withheld numbers read as adverse, so the default is no until the numbers appear. Both positions want the same four things: 2019 cohort net revenue retention, the revenue base behind "triple in 2021," the gated KLAS profile, and ten named revenue-cycle references. The verdict below resolves the disagreement on a practical fact rather than a philosophical one.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab4"><section><h3 class="ott-secttitle">The Limits of an Outside-In Read</h3><p>This memo is built entirely from the dated public record, and the reader should know exactly where that record is thin.</p>
+<hr /></section><a class="ott-next" data-tab="tab4">Next chapter &rarr; 05 &nbsp;Sources &amp; Method</a></div><div class="ott-panel ott-prose" id="tab4"><section><h3 class="ott-secttitle">The Limits of an Outside-In Read</h3><p>This memo is built entirely from the dated public record, and the reader should know exactly where that record is thin.</p>
 <p><strong>KLAS is the biggest gap.</strong> A KLAS Emerging Technology Spotlight on Olive (September 2019) and the RPA category reports exist pre-cutoff [58], and their contents are paywalled. We cite their existence, not their contents. If the KLAS record were opened and showed satisfied production customers at scale, it would bear directly on the load-bearing assumption.</p>
 <p><strong>Employee sentiment goes dark after September 2019.</strong> Exactly one pre-cutoff archive capture of the company's Glassdoor page exists [9]. Anything employees said in 2020-2021 is unrecoverable within this memo's dating rules.</p>
 <p><strong>The social record is partial and not fully reproducible.</strong> The Reddit archive is a partial mirror with known coverage gaps, and it rate-limits re-queries, so the silence finding is a limited search result rather than a census [57]. Coverage of X is thin, and Olive-specific skepticism searches there came back empty, which may reflect coverage rather than absence. LinkedIn is unrecoverable in datable form.</p>
@@ -459,14 +470,13 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
     <span>On The Table · onthetable.vc</span></div>
 </article>
 <script>
-document.querySelectorAll('.ott-tab').forEach(function(b){
-  b.addEventListener('click', function(){
-    document.querySelectorAll('.ott-tab').forEach(function(x){x.classList.remove('active');});
-    document.querySelectorAll('.ott-panel').forEach(function(x){x.classList.remove('active');});
-    b.classList.add('active');
-    document.getElementById(b.dataset.tab).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
+function ottGo(pid){
+  document.querySelectorAll('.ott-tab').forEach(function(x){ x.classList.toggle('active', x.dataset.tab===pid); });
+  document.querySelectorAll('.ott-panel').forEach(function(x){ x.classList.toggle('active', x.id===pid); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-tab]').forEach(function(b){
+  b.addEventListener('click', function(){ ottGo(b.dataset.tab); });
 });
 </script>
 </body></html>

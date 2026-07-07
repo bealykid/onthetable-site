@@ -91,17 +91,27 @@
 .posture-nogo   { --posture:var(--nogo); }
 .posture-cannot { --posture:var(--cannot); }
 
-/* ---------- tab nav ---------- */
-.ott-tabs { display:flex; gap:2px; flex-wrap:wrap; border-bottom:2px solid var(--ink); margin:22px 0 0; }
+/* ---------- chapters nav ---------- */
+.ott-chapters-label { font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--dim); margin:26px 0 11px; }
+.ott-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0; }
 .ott-tab {
-  font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
-  padding:10px 15px; color:var(--dim); background:none; border:none; cursor:pointer;
-  border-bottom:2px solid transparent; margin-bottom:-2px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase;
+  padding:9px 13px; color:var(--ink-soft); background:var(--paper-2);
+  border:1px solid var(--tag-border); border-radius:3px; cursor:pointer;
+  display:inline-flex; align-items:baseline; gap:7px;
 }
-.ott-tab:hover { color:var(--ink); }
-.ott-tab.active { color:var(--oxblood); border-bottom-color:var(--oxblood); font-weight:600; }
+.ott-tab .n { color:var(--gold); font-weight:600; }
+.ott-tab:hover { border-color:var(--oxblood); color:var(--ink); }
+.ott-tab.active { color:#fff; background:var(--oxblood); border-color:var(--oxblood); }
+.ott-tab.active .n { color:rgba(255,255,255,0.72); }
 .ott-panel { display:none; padding-top:28px; }
 .ott-panel.active { display:block; }
+.ott-next {
+  display:inline-block; margin-top:32px; font-family:var(--mono); font-size:11px; letter-spacing:0.05em;
+  color:var(--oxblood); text-decoration:none; border:1px solid var(--oxblood); border-radius:3px;
+  padding:10px 15px; cursor:pointer;
+}
+.ott-next:hover { background:var(--oxblood); color:#fff; }
 
 /* ---------- body prose ---------- */
 .ott-prose { font-family:var(--serif); font-size:15px; line-height:1.62; color:var(--ink); }
@@ -152,7 +162,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
   html, body { background: var(--paper); }
   body { padding:0; margin:0; }
   .ott-doc { max-width:none; margin:0; padding:0; background:var(--paper); box-shadow:none; border-radius:0; }
-  .ott-tabs { display:none; }
+  .ott-tabs, .ott-chapters-label, .ott-next { display:none; }
   .ott-topbar { display:none; }
   .ott-panel { display:block !important; padding-top:0; }
   /* Sources starts fresh; everything else flows continuously */
@@ -191,7 +201,8 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
     </div>
   </div>
 
-  <nav class="ott-tabs"><button class="ott-tab active" data-tab="tab0">Verdict</button><button class="ott-tab" data-tab="tab1">Executive Topline</button><button class="ott-tab" data-tab="tab2">The Full Read</button><button class="ott-tab" data-tab="tab3">The Table</button><button class="ott-tab" data-tab="tab4">Sources &amp; Method</button></nav>
+  <div class="ott-chapters-label">The memo, in 5 chapters. Click any to jump.</div>
+  <nav class="ott-tabs"><button class="ott-tab active" data-tab="tab0"><span class="n">01</span>Verdict</button><button class="ott-tab" data-tab="tab1"><span class="n">02</span>Executive Topline</button><button class="ott-tab" data-tab="tab2"><span class="n">03</span>The Full Read</button><button class="ott-tab" data-tab="tab3"><span class="n">04</span>The Table</button><button class="ott-tab" data-tab="tab4"><span class="n">05</span>Sources &amp; Method</button></nav>
   <div class="ott-panel active ott-prose" id="tab0"><section><h3 class="ott-secttitle">The Verdict</h3><p><strong>GO WITH EXPERIMENTS. Confidence 70 out of 100.</strong></p>
 <p><strong>The framing does the work, so here it is exactly: participation in the $100 million Series D at $1.0 billion post-money, negotiated with standard pre-close diligence access, sized for a category-winner outcome.</strong> On the dated record, the thesis rests on third-party evidence of a kind most private deals never show: an adoption curve inflecting on five independent surfaces at 10 percent category penetration, a mainstream-analyst arc to Leader, a graveyard whose deaths all belong to a different business model, demonstrated pricing power against free competition, the deepest founder-market fit available in this category, and an incumbent field distracted at the exact decision date, in one case documented in an SEC filing ten days before it. What the record cannot do is witness the revenue, and the round's own structure supplies no price discovery. So the go is conditioned, the conditions are falsifiable, and each carries its kill threshold.</p>
 <p><strong>The experiments:</strong></p>
@@ -209,7 +220,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <li><strong>A dated incumbent action aimed specifically at Zoom before verification completes</strong> (a meetings-first Teams push at Skype-for-Business parity, or a Cisco pricing attack on the $14.99 tier) flips this to NO-GO. At the decision date, none was found in the searches run.</li>
 </ol>
 <p>And one watch item that moves confidence rather than posture: any independent mark near $1 billion (a competing term sheet, secondary trades) would firm up the price leg without changing the call.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab1"><p class="ott-pivotal">How many of the 380,000 are paying?</p><section><h3 class="ott-secttitle">The Pivotal Question</h3><p><strong>How many of the 380,000 are paying?</strong></p>
+<hr /></section><a class="ott-next" data-tab="tab1">Next chapter &rarr; 02 &nbsp;Executive Topline</a></div><div class="ott-panel ott-prose" id="tab1"><p class="ott-pivotal">How many of the 380,000 are paying?</p><section><h3 class="ott-secttitle">The Pivotal Question</h3><p><strong>How many of the 380,000 are paying?</strong></p>
 <p>In November 2016, Zoom's own press release claimed "over 380,000 business customers," usage growth of 215 percent in a year, and a trajectory toward 15 billion annual meeting minutes [11]. Two months earlier, the company's own board member had told an interviewer that Zoom "doesn't need any capital right now so it's not seeking capital," and that if it ever did raise, the price "would be in the billion range" [19]. Now a single investor has arrived with $100 million at exactly that number.</p>
 <p>Here is what the dated public record can do, and what it cannot. It can document a real migration: buyers walking away from tools that were already free, into a product that bills by the host, absorbing a 50 percent price increase on the way [15, 1, 98]. The graveyard it holds is filled with companies that sold this category as hardware and empty, in the searches run, of companies that sold what Zoom sells (Section 2). The founder record runs deeper than anything else available in the category (Section 4), and the incumbent field was visibly distracted at the exact decision date, GoToMeeting mid-merger in its owner's own SEC filings [56], Microsoft aiming its big launch at Slack rather than at meetings [49]. What the record cannot produce, in any source this memo cites or any search run for it, is a single dollar of revenue. Every scale number above the pricing page is Zoom talking about Zoom, and the customer-count wording changed in January 2016, from "business customers" to an undefined and likely broader "customer organizations," exactly when the growth story needed it [10, 11].</p>
 <p>The consensus says this market is solved and crowded, and the consensus is measuring the corpse: the hardware market that IDC clocked flat after three straight annual declines [66], while the minutes flowing through cloud software grew roughly 75-fold in five years (our arithmetic on a company-claimed number, Section 1) [59, 11]. The right question is not whether the wave is real. The dated record says it is. The right question is the composition of one number.</p>
@@ -227,7 +238,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <p><strong>The independently observable footprint is an enthusiast niche.</strong> Remove everything Zoom says about itself and here is what a skeptic can actually count at the decision date: 487 lifetime iOS ratings [96]; the 31 Hacker News comments a date-filtered search finds ever mentioning zoom.us [81]; 26 TrustRadius reviews, every displayed one solicited and incentivized, most posted in a single two-week window [93]; a G2 grid position well behind Skype, GoToMeeting, and WebEx on market presence [94]. The glowing quotes come from Hacker News, r/startups, and tech Twitter, the exact population that churns tools annually and evangelizes loudly.</p>
 <p><strong>And the round itself is the warning.</strong> The company says, through its own board member, that it does not need money [19]. One investor then supplies $100 million at the seller's own floated anchor, alone. No competing term sheet, no syndicate, no revenue disclosure anywhere in the admitted record. Capital raised for the seller's reasons, at the seller's price, validated by nobody.</p>
 <p>That is the pass, and it is a respectable one. What follows is what the dated record does to it.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab2"><section><h3 class="ott-secttitle">1. Market sizing, with the math shown</h3><p><strong>The measured market is the corpse.</strong> The number the consensus points at is enterprise videoconferencing equipment: $627.5 million in the fourth quarter of 2015, roughly $2.5 billion a year (our arithmetic), up just 1.5 percent for the year after three consecutive annual declines, with personal videoconferencing hardware down 20.6 percent year over year and back-end bridge infrastructure down 15.6 percent [66]. Cisco held 45.3 percent of that market, Polycom 19.2 [66]. When Cisco bought Tandberg in 2009 it pitched "collaboration" as a $34 billion market [30], but that big frame was always incumbent hardware plus unified-communications suites, not meetings software.</p>
+<hr /></section><a class="ott-next" data-tab="tab2">Next chapter &rarr; 03 &nbsp;The Full Read</a></div><div class="ott-panel ott-prose" id="tab2"><section><h3 class="ott-secttitle">1. Market sizing, with the math shown</h3><p><strong>The measured market is the corpse.</strong> The number the consensus points at is enterprise videoconferencing equipment: $627.5 million in the fourth quarter of 2015, roughly $2.5 billion a year (our arithmetic), up just 1.5 percent for the year after three consecutive annual declines, with personal videoconferencing hardware down 20.6 percent year over year and back-end bridge infrastructure down 15.6 percent [66]. Cisco held 45.3 percent of that market, Polycom 19.2 [66]. When Cisco bought Tandberg in 2009 it pitched "collaboration" as a $34 billion market [30], but that big frame was always incumbent hardware plus unified-communications suites, not meetings software.</p>
 <p><strong>The usage market inflected while the dollar market flatlined.</strong> By BlueJeans' own account, the entire video conferencing market carried about 200 million minutes a year in 2011; BlueJeans alone claimed over a billion minutes a year by September 2015 [59]. Zoom claimed a 15-billion-minute annual trajectory by November 2016 (company-originated) [11]. Take the claims at face value and the category's minutes grew roughly 75-fold in five years, about 137 percent compounded annually (our arithmetic on company-claimed numbers, and a conservative construction: the 2016 figure is one vendor's claimed minutes set against the whole market's claimed 2011 base, so the true category multiple runs higher). Discount Zoom's figure by two thirds and the compounding still runs near 90 percent a year against a flat hardware base. That divergence is the signature of substitution: value draining out of $20,000 room installations [62] into $14.99 hosts and software rooms the company priced "as low as $99.90" a year [15, 12]. A flat market is what you get when you count the corpse.</p>
 <p><strong>Penetration data says demand is barely started.</strong> A December 2015 industry survey found 38 percent of organizations using cloud video conferencing, and only about 10 percent of workers using desktop video weekly [68]. A crowded vendor count layered over single-digit daily-use penetration is what a category looks like before its winner is named, not after it is solved.</p>
 <p><strong>Now the number the price actually rests on, with our arithmetic labeled.</strong> First the frames, named: the $2.5 billion hardware figure above is the measured but dying market, not Zoom's; the total addressable market for meetings software has no reliable dated dollar figure in this record; the winnable wedge is paid hosts plus rooms, and what follows is our built-up estimate of it. Zoom's claimed customer arc, all company-originated: 1,000 businesses in January 2013 [1], 3,500 by May 2013 [7], 4,500 by September 2013 [3], more than 20,000 by mid-2014 [8, 9], 65,000 by February 2015 [4], "over 180,000 customer organizations" in January 2016 [10], "over 380,000 business customers" in November 2016 [11]. Note the January 2016 wording: "customer organizations," undefined, and likely broader than the "business customers" used both a year earlier and a year later. That wording shift is the company's own creation, the release never defines the term, and it matters enormously. If all 380,000 pay for an average of two to ten hosts at a blended $15 to $20 a month, implied annual revenue runs from roughly $137 million to $912 million (our arithmetic; the stretch case). If only 10 to 25 percent pay, the band collapses to roughly $14 million to $228 million (the floor). A defensible middle (25 percent paying, three hosts, $15) implies about $51 million (the likely case), which would put $1 billion at roughly 20 times revenue [11, 15, our arithmetic throughout].</p>
@@ -346,7 +357,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <p><strong>Capital and attention flowed to the category, mostly to other people.</strong> Challenger raises cluster in 2015 and 2016: BlueJeans' $76.5 million Series E [59], Fuze's $112 million [60], Highfive [63], Switch [64]. The 2016 headline narrative is consolidation: Polycom private [34, 35], GoTo merged [55]. Sequoia's only dated signal inside the window adjacent to this deal is Carl Eschenbach, VMware's operations chief, joining the firm in March 2016 [72]; no public signal of Sequoia circling video, dated inside the window, was found in the searches run.</p>
 <p><strong>The consensus this timing call runs against, in contemporaneous words:</strong> video conferencing "wasn't an 'in space'" [19]; "seemingly a never ending list of vendors... no one does it just right" [5]; "one of several companies to enter the market in recent years" [6]; "some 643 WebRTC-based startups" [71]; and an analyst culture still explaining that "some workers are still uncomfortable" on video, in a market it described as showing "solutions parity" [70]. Crowded supply plus 10 percent weekly usage [68] reads, on the dated record, as a category before its winner, not after its commoditization. The timing verdict this table lands on: not too early, because the curve has visibly turned; not too late, because nine in ten desks still do not use the behavior weekly.</p>
 <p><strong>Stated gaps:</strong> no admissible search-trends data and no hiring-signal data (job postings, employer reviews) could be sourced for this memo. Both are instrument gaps, stated here rather than papered over.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab3"><section><h3 class="ott-secttitle">The Table Deliberates</h3><p>Six seats read the same evidence file independently, each with a different mandate, committed to positions, then argued. Their positions, before and after the argument:</p>
+<hr /></section><a class="ott-next" data-tab="tab3">Next chapter &rarr; 04 &nbsp;The Table</a></div><div class="ott-panel ott-prose" id="tab3"><section><h3 class="ott-secttitle">The Table Deliberates</h3><p>Six seats read the same evidence file independently, each with a different mandate, committed to positions, then argued. Their positions, before and after the argument:</p>
 <table>
 <thead>
 <tr>
@@ -401,7 +412,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <p><strong>Second: the Growth Partner's burn arithmetic forced the dissent's only retreat.</strong> The triangulation ($45.5 million lifetime, a board member declining capital, an enterprise operation visibly running under a roughly $2 million monthly ceiling) makes a strong case that the company is substantially revenue-funded. The Red Team's concession, verbatim: "I concede a floor exists." The dispute narrowed to whether the floor sits near $30 million or $150 million of annual recurring revenue, which no admissible source can resolve, and which is precisely what the experiments are for.</p>
 <p><strong>Third: the price-discovery point survived every seat, unanswered.</strong> A sole investor arrived at the exact "billion range" the company's own board member floated publicly two months earlier [19], no syndicate, no competing term sheet found, no admissible revenue beneath the number. Every seat tried to refute it. None could, because refutation would require evidence that does not exist in the record: a competing bid, an independent mark, a financial statement. The Skeptic's exit comparables (WebEx at $3.2 billion [43], Polycom at $2.0 billion [34]) defend the category's ceiling, not this round's price-setting process. The bulls kept their verdicts because the experiments already gate the number the argument turns on; they surrendered confidence because no experiment manufactures price discovery after the fact.</p>
 <p><strong>The dissent's last argument, and how the table ruled on it,</strong> is a question about who can actually run the experiments. The Red Team argued that in a sole-investor round, only that investor ever sees the cohort file, so a conditional GO collapses into a NO for everyone else. The ruling, printed in full in the Verdict: for a party genuinely negotiating participation, access is a condition of the wire, refusal is itself a result that resolves the experiments negatively, and material parts of the verification can be run from outside the building using instruments the record itself supplies. The ruling has a hard edge, though, and it is stated as a rider rather than buried: a reader with no seat at this table has no go available here.</p>
-<hr /></section></div><div class="ott-panel ott-prose" id="tab4"><section><h3 class="ott-secttitle">The Limits of an Outside-In Read</h3><p>This memo is built entirely from the dated public record, and the reader should know exactly where that record is thin.</p>
+<hr /></section><a class="ott-next" data-tab="tab4">Next chapter &rarr; 05 &nbsp;Sources &amp; Method</a></div><div class="ott-panel ott-prose" id="tab4"><section><h3 class="ott-secttitle">The Limits of an Outside-In Read</h3><p>This memo is built entirely from the dated public record, and the reader should know exactly where that record is thin.</p>
 <p><strong>The subject's later fame poisons the well, and the dating rules are the antidote, at a cost.</strong> Nearly everything written about this company postdates the decision date. Every item cited here carries an on-page date or an archive timestamp inside the window, and everything that could not prove its date was excluded. The record therefore feels thin relative to the size of the story. That thinness is the method working, not a research failure, and it is why several findings in this memo are phrased as "none found in the searches run" rather than as universal claims.</p>
 <p><strong>No admissible revenue, valuation, or headcount exists anywhere in the file.</strong> Every unit-economics statement in this memo is triangulated from pricing pages, funding arithmetic, and interested-party statements, and is labeled as such. The record can see this company's demand. It cannot see its income statement, and an investor with a seat at the table is not similarly limited. That asymmetry is both this memo's central caveat and the reason its verdict is conditional.</p>
 <p><strong>The buyer-voice record has instrument boundaries.</strong> No Quora or Spiceworks material could be dated and admitted. No archive of individual G2 reviews dated inside the window was found; only the category grid could be used [94, 95]. The TrustRadius reviews are solicited and incentivized, and are weighted accordingly [93]. Twitter items are returns from a date-bounded platform search, not a census. The social record is a partial mirror everywhere, and the silences in it are limited search results, not proofs of absence.</p>
@@ -531,14 +542,13 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
     <span>On The Table · onthetable.vc</span></div>
 </article>
 <script>
-document.querySelectorAll('.ott-tab').forEach(function(b){
-  b.addEventListener('click', function(){
-    document.querySelectorAll('.ott-tab').forEach(function(x){x.classList.remove('active');});
-    document.querySelectorAll('.ott-panel').forEach(function(x){x.classList.remove('active');});
-    b.classList.add('active');
-    document.getElementById(b.dataset.tab).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
+function ottGo(pid){
+  document.querySelectorAll('.ott-tab').forEach(function(x){ x.classList.toggle('active', x.dataset.tab===pid); });
+  document.querySelectorAll('.ott-panel').forEach(function(x){ x.classList.toggle('active', x.id===pid); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-tab]').forEach(function(b){
+  b.addEventListener('click', function(){ ottGo(b.dataset.tab); });
 });
 </script>
 </body></html>
