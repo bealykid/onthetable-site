@@ -38,7 +38,7 @@
   h1{font-family:var(--display);font-weight:700;font-size:34px;line-height:1.15;letter-spacing:-0.01em;margin-bottom:14px;}
   .sell{font-family:var(--display);font-style:italic;font-weight:500;font-size:21px;color:var(--ink);}
 
-  .card{display:flex;gap:24px;align-items:flex-start;border:1px solid var(--ink);padding:20px 22px;margin:38px 0;background:var(--paper-2);}
+  .card{display:flex;gap:24px;align-items:flex-start;border:1px solid var(--ink);padding:20px 22px;margin:26px 0;background:var(--paper-2);}
   .card .num{font-family:var(--display);font-weight:800;font-size:72px;line-height:0.82;letter-spacing:-0.03em;color:var(--oxblood);}
   .card .num small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--dim);margin-top:8px;}
   .card .hold{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);}
@@ -81,17 +81,7 @@
     <p class="sell">Your AI agrees with you. Ours is required to disagree.</p>
   </header>
 
-  <div class="card">
-    <div class="num">75<small>Confidence / 100</small></div>
-    <div>
-      <div class="hold">The Holding</div>
-      <div class="posture">No-Go As Framed</div>
-      <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">second-model audited</span></div>
-      <div class="cap">Sample verdict · Olive AI, Inc. · decided June 30, 2021</div>
-    </div>
-  </div>
-
-  <section>
+  <section style="margin-top:40px;">
     <h2>The problem</h2>
     <p>Every investor now has a research chatbot open. Ask it about a deal you are excited about and it catches your excitement and hands it back to you with citations. It is a mirror with a search engine attached. That is not diligence. That is company.</p>
   </section>
@@ -109,6 +99,16 @@
 
   <section class="proof">
     <h2>The proof</h2>
+    <p>Before you trust a verdict on a live deal, you should see the method work where the answer is known. These are backtests. We take a famous deal, freeze the clock the day before the money moved, and hand the table only what was public before that date. Not one source in the file postdates the decision. Then the seats argue it out as if the wire were tomorrow. Here is what a verdict looks like:</p>
+    <div class="card">
+      <div class="num">75<small>Confidence / 100</small></div>
+      <div>
+        <div class="hold">The Holding</div>
+        <div class="posture">No-Go As Framed</div>
+        <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">audited by a second AI</span></div>
+        <div class="cap">Sample verdict &middot; Olive AI, Inc. &middot; decided June 30, 2021</div>
+      </div>
+    </div>
     <p><strong>Zoom, decision date January 16, 2017.</strong> The day before Sequoia wired $100 million at a $1 billion valuation, the consensus said video conferencing was solved and crowded. Using only sources dated before that day, 114 of them, linked, the table said GO WITH EXPERIMENTS at confidence 70, and named the one number that decided the case.</p>
     <p><strong>Olive AI, decision date June 30, 2021.</strong> The day before the $400 million round at a $4 billion valuation: NO-GO AS FRAMED at confidence 75, built from 64 dated public sources that all existed before the wire.</p>
     <p>The claim is not foresight. Backtests are run under a hard rule that no source may postdate the decision date, and each memo carries that caveat in print. The claim is that the evidence was on the table.</p>
@@ -128,8 +128,9 @@
   <hr>
 
   <section>
-    <h2>The founding reader offer</h2>
+    <h2>Put a company on the table</h2>
     <p>Name a company you are seriously considering. No NDA, you send us nothing. You get the full memo, built from the dated public record: $2,500, waived for a small number of founding readers in exchange for twenty minutes telling us what is missing.</p>
+    <p>Prefer not to name a live deal? Give us one you already decided, yours or anyone's, and we will show you what the table would have said the day before the wire.</p>
     <p>Every memo ends with the experiments only insider access can run. Running them is the engagement that follows, if the memo earns it.</p>
     <p class="cta"><a href="mailto:steve@onthetable.vc?subject=Founding%20reader%3A%20a%20company%20to%20put%20on%20the%20table">Name a company &middot; steve@onthetable.vc</a></p>
   </section>
