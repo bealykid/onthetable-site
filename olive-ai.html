@@ -156,6 +156,19 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 .ott-topbar a.dl { color:var(--oxblood); border-color:var(--oxblood); }
 .ott-topbar a:hover { background:var(--paper-2); }
 
+/* ---- reader preamble: printed editor's note above the card ---- */
+.ott-readme { margin:0 0 26px; padding:15px 20px; background:var(--paper-2);
+  border-left:3px solid var(--gold); }
+.ott-readme .eye { font-family:var(--mono); font-size:11px; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.ott-readme p { font-family:var(--serif); font-size:13.5px; line-height:1.6;
+  color:var(--ink-soft); margin:0 0 10px; }
+.ott-readme p:last-child { margin-bottom:0; }
+.ott-readme b { color:var(--ink); font-weight:600; }
+/* plain gloss under the posture line */
+.ott-verdict .gloss { font-family:var(--serif); font-size:14px; font-style:italic;
+  color:var(--ink-soft); line-height:1.45; margin:6px 0 12px; }
+
 /* ---- print / PDF: a real paginated document, not a sliced card ---- */
 @page { size: Letter; margin: 22mm 20mm 20mm; }
 @media print {
@@ -168,7 +181,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
   /* Sources starts fresh; everything else flows continuously */
   #tab4 { break-before: page; }
   /* never split these mid-way */
-  .ott-mast, .ott-caption, .ott-verdict { break-inside: avoid; }
+  .ott-mast, .ott-caption, .ott-verdict, .ott-readme { break-inside: avoid; }
   h2, h3, .ott-secttitle, .ott-headline, .ott-pivotal { break-after: avoid; }
   tr, li, blockquote { break-inside: avoid; }
   .ott-foot { break-before: avoid; }
@@ -191,13 +204,16 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
     Columbus, Ohio · Healthcare workflow automation · Series H · $400M at a $4.0B valuation · Decided June 30, 2021
   </div>
 
+  <aside class="ott-readme"><div class="eye">Read me first</div><p><b>What this document is.</b> A go / no-go diligence memo on Olive AI, built as a backtest. We froze the clock on June 30, 2021, the day before the $400 million Series H that valued it at $4 billion. Six AI seats read only sources dated before that day, argued the case against each other on the record, and a managing adjudication weighed the surviving arguments, never the votes. A second AI from a different company then audited every source, date, and quote before this memo could ship. A human editor synthesized and signed the final read.</p><p><b>How to read it.</b> Start with the Verdict Card and the Executive Topline. The Full Read is the complete argument. The Table is the debate record, with the strongest dissent printed in full. Sources &amp; Method lists every citation with its date. Nothing here relies on information published after June 30, 2021; that rule and its limits are stated in print inside.</p></aside>
+
   <div class="ott-verdict">
-    <div class="num">75<small>Confidence / 100</small></div>
+    <div class="num">75<small>Confidence: 75 of 100</small></div>
     <div class="body">
       <div class="hold">The Holding</div>
       <div class="posture">No-Go As Framed</div>
-      <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">second-model audited</span></div>
-      <div class="flip"><b>Reverses on</b>&nbsp; net revenue retention of the 2019 hospital cohort, as of Q1 2021.</div>
+      <div class="gloss">We would not invest on the terms as presented.</div>
+      <div class="tags"><span class="tag">64 dated sources</span><span class="tag">no source postdates the decision</span><span class="tag">audited by a second AI</span></div>
+      <div class="flip"><b>What would change our mind</b>&nbsp; net revenue retention of the 2019 hospital cohort, as of Q1 2021.</div>
     </div>
   </div>
 
