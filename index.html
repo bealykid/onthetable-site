@@ -108,6 +108,9 @@
   .samples{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
   .cases{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0;}
   .cases .card{margin:0;}
+  a.card{text-decoration:none;color:var(--ink);display:flex;}
+  a.card:hover{background:#eae3d2;}
+  .card .go{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--oxblood);margin-top:10px;}
   .samples a{display:block;border:1px solid var(--tag-border);border-radius:3px;padding:13px 16px;text-decoration:none;color:var(--ink);background:var(--paper-2);}
   .samples a:hover{border-color:var(--ink);}
   .samples a b{font-family:var(--display);font-weight:600;font-size:16px;display:block;margin-bottom:2px;}
@@ -265,7 +268,7 @@
     <p class="hed">Tested where the outcome is already known.</p>
     <p>These are backtests. We take a famous deal, freeze the clock the day before the money moved, and hand the table only what was public before that date. Not one source in the file postdates the decision. Then the seats argue it out as if the wire were tomorrow. Here is what the table said:</p>
     <div class="cases">
-    <div class="card case case-goexp">
+    <a class="card case case-goexp" href="zoom.html">
       <div class="num">70<small>Confidence: 70 of 100</small></div>
       <div>
         <div class="cap">Case 1 &middot; decided January 16, 2017</div>
@@ -273,9 +276,10 @@
         <div class="posture">Go With Experiments</div>
         <p>The day before Sequoia wired $100 million at a $1 billion valuation, the consensus said video conferencing was solved and crowded. Using only sources dated before that day, 114 of them, linked, the table named the one number that decided the case.</p>
         <div class="tags"><span class="tag">114 dated sources</span><span class="tag">no source postdates the decision</span><span class="tag">audited by a second AI</span></div>
+        <div class="go">Read the memo &rarr;</div>
       </div>
-    </div>
-    <div class="card case case-nogo">
+    </a>
+    <a class="card case case-nogo" href="olive-ai.html">
       <div class="num">75<small>Confidence: 75 of 100</small></div>
       <div>
         <div class="cap">Case 2 &middot; decided June 30, 2021</div>
@@ -283,8 +287,9 @@
         <div class="posture">No-Go As Framed</div>
         <p>The day before the $400 million round at a $4 billion valuation, built from 64 dated public sources that all existed before the wire.</p>
         <div class="tags"><span class="tag">64 dated sources</span><span class="tag">no source postdates the decision</span><span class="tag">audited by a second AI</span></div>
+        <div class="go">Read the memo &rarr;</div>
       </div>
-    </div>
+    </a>
     </div>
     <p>The claim is not foresight. Backtests are run under a hard rule that no source may postdate the decision date, and each memo carries that caveat in print. The claim is that the evidence was on the table. Backtests do not predict the future. They prove the process.</p>
     </div>

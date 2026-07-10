@@ -156,6 +156,15 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 .ott-topbar a.dl { color:var(--oxblood); border-color:var(--oxblood); }
 .ott-topbar a:hover { background:var(--paper-2); }
 
+/* ---- posture bar: brand rule, web chrome only ---- */
+.ott-pbar { display:flex; height:8px; margin:14px 0 24px; }
+.ott-pbar span { flex:1; }
+.ott-pbar .b1 { background:#2f5d3a; }
+.ott-pbar .b2 { background:#8a6d2a; }
+.ott-pbar .b3 { background:#7a2e2e; }
+.ott-pbar .b4 { background:#5a544a; opacity:0.22; }
+.ott-pbar.bot { margin:34px 0 0; }
+
 /* ---- reader preamble: printed editor's note above the card ---- */
 .ott-readme { margin:0 0 26px; padding:15px 20px; background:var(--paper-2);
   border-left:3px solid var(--gold); }
@@ -177,6 +186,7 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
   .ott-doc { max-width:none; margin:0; padding:0; background:var(--paper); box-shadow:none; border-radius:0; }
   .ott-tabs, .ott-chapters-label, .ott-next { display:none; }
   .ott-topbar { display:none; }
+  .ott-pbar { display:none; }
   .ott-panel { display:block !important; padding-top:0; }
   /* Sources starts fresh; everything else flows continuously */
   #tab4 { break-before: page; }
@@ -197,6 +207,8 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 
   <div class="ott-mast"><span class="nm">On The Table</span>
     <span class="no">MEMO 001 · RETROSPECTIVE / BACKTEST</span></div>
+
+  <div class="ott-pbar"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
 
   <div class="ott-caption">
     <span class="rt">No. 001</span>
@@ -481,6 +493,8 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 <li>Tufts Medical Center on X ("The Olive traveling bus is at #TuftsMC today... Our official #AI partner also handed out ice cream to staff"), 2021-06-30. https://x.com/TuftsMedicalCtr/status/1410266062092914689</li>
 <li>Drive Capital on X ("@oliveai__ plans to hire 1,000 employees in a year"), 2021-06-30. https://x.com/drivecapital/status/1410266671651168257</li>
 </ol></section></div>
+
+  <div class="ott-pbar bot"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
 
   <div class="ott-foot"><span>Decision support · not investment advice</span>
     <span>On The Table · onthetable.vc</span></div>
