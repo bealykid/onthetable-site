@@ -178,6 +178,12 @@ body { background:#e8e3d7; margin:0; padding:32px 16px 64px; }
 .ott-verdict .gloss { font-family:var(--serif); font-size:14px; font-style:italic;
   color:var(--ink-soft); line-height:1.45; margin:6px 0 12px; }
 
+/* ---- small screens: stack the verdict card ---- */
+@media (max-width:560px) {
+  .ott-verdict { flex-direction:column; gap:16px; }
+  .ott-verdict .num { font-size:64px; }
+}
+
 /* ---- print / PDF: a real paginated document, not a sliced card ---- */
 @page { size: Letter; margin: 22mm 20mm 20mm; }
 @media print {
