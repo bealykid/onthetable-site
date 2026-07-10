@@ -59,6 +59,7 @@
   .plate .prow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);}
   .plate .prow.bot{border-top:1px solid var(--rule);padding-top:10px;margin-top:4px;color:var(--dim);}
   .plate svg{display:block;width:100%;height:auto;margin:10px 0 8px;}
+  .plate .seat{cursor:default;}
 
   .pbar{display:flex;height:8px;max-width:1080px;margin:0 auto;}
   .pbar span{flex:1;}
@@ -152,27 +153,44 @@
     <figure class="plate">
       <div class="prow"><span>Fig. 1 &middot; The Room</span><span style="color:var(--dim);">Six Seats &middot; One Deal</span></div>
       <svg viewBox="0 0 460 306" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top-down diagram of a boardroom table: six numbered seats around one deal">
-        <!-- backrests -->
-        <rect x="158" y="16" width="44" height="7" rx="3" fill="#1a1815"/>
-        <rect x="258" y="16" width="44" height="7" rx="3" fill="#1a1815"/>
-        <rect x="415" y="131" width="7" height="44" rx="3" fill="#1a1815"/>
-        <rect x="38" y="131" width="7" height="44" rx="3" fill="#1a1815"/>
-        <rect x="158" y="283" width="44" height="7" rx="3" fill="#1a1815"/>
-        <rect x="258" y="283" width="44" height="7" rx="3" fill="#1a1815"/>
-        <!-- seats -->
         <g font-family="'IBM Plex Mono',monospace" font-size="12" fill="#f6f3ec" text-anchor="middle">
-          <g><title>01 &middot; The Operator</title><rect x="158" y="29" width="44" height="36" rx="4" fill="#1a1815"/><text x="180" y="52">01</text></g>
-          <g><title>02 &middot; The Skeptic</title><rect x="258" y="29" width="44" height="36" rx="4" fill="#1a1815"/><text x="280" y="52">02</text></g>
-          <g><title>03 &middot; The Customer-Truth Advisor</title><rect x="373" y="131" width="36" height="44" rx="4" fill="#1a1815"/><text x="391" y="158">03</text></g>
-          <g><title>06 &middot; The Red Team</title><rect x="51" y="131" width="36" height="44" rx="4" fill="#1a1815"/><text x="69" y="158">06</text></g>
-          <g><title>04 &middot; The Growth Partner</title><rect x="258" y="241" width="44" height="36" rx="4" fill="#1a1815"/><text x="280" y="264">04</text></g>
-          <g><title>05 &middot; The Timing Analyst</title><rect x="158" y="241" width="44" height="36" rx="4" fill="#1a1815"/><text x="180" y="264">05</text></g>
+          <g class="seat" data-n="01 &middot; THE OPERATOR">
+            <rect x="146" y="8" width="68" height="66" fill="none" pointer-events="all"/>
+            <rect x="158" y="16" width="44" height="7" rx="3" fill="#1a1815"/>
+            <rect x="158" y="29" width="44" height="36" rx="4" fill="#1a1815"/><text x="180" y="52">01</text>
+          </g>
+          <g class="seat" data-n="02 &middot; THE SKEPTIC">
+            <rect x="246" y="8" width="68" height="66" fill="none" pointer-events="all"/>
+            <rect x="258" y="16" width="44" height="7" rx="3" fill="#1a1815"/>
+            <rect x="258" y="29" width="44" height="36" rx="4" fill="#1a1815"/><text x="280" y="52">02</text>
+          </g>
+          <g class="seat" data-n="03 &middot; THE CUSTOMER-TRUTH ADVISOR">
+            <rect x="361" y="119" width="72" height="68" fill="none" pointer-events="all"/>
+            <rect x="415" y="131" width="7" height="44" rx="3" fill="#1a1815"/>
+            <rect x="373" y="131" width="36" height="44" rx="4" fill="#1a1815"/><text x="391" y="158">03</text>
+          </g>
+          <g class="seat" data-n="04 &middot; THE GROWTH PARTNER">
+            <rect x="246" y="229" width="68" height="70" fill="none" pointer-events="all"/>
+            <rect x="258" y="283" width="44" height="7" rx="3" fill="#1a1815"/>
+            <rect x="258" y="241" width="44" height="36" rx="4" fill="#1a1815"/><text x="280" y="264">04</text>
+          </g>
+          <g class="seat" data-n="05 &middot; THE TIMING ANALYST">
+            <rect x="146" y="229" width="68" height="70" fill="none" pointer-events="all"/>
+            <rect x="158" y="283" width="44" height="7" rx="3" fill="#1a1815"/>
+            <rect x="158" y="241" width="44" height="36" rx="4" fill="#1a1815"/><text x="180" y="264">05</text>
+          </g>
+          <g class="seat" data-n="06 &middot; THE RED TEAM">
+            <rect x="26" y="119" width="72" height="68" fill="none" pointer-events="all"/>
+            <rect x="38" y="131" width="7" height="44" rx="3" fill="#1a1815"/>
+            <rect x="51" y="131" width="36" height="44" rx="4" fill="#1a1815"/><text x="69" y="158">06</text>
+          </g>
         </g>
         <!-- table -->
         <rect x="112" y="75" width="236" height="156" fill="#7a2e2e"/>
         <rect x="124" y="87" width="212" height="132" fill="none" stroke="#f6f3ec" stroke-width="1" opacity="0.85"/>
         <line x1="196" y1="163" x2="264" y2="163" stroke="#f6f3ec" stroke-width="1" opacity="0.85"/>
         <text x="230" y="150" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="3" fill="#f6f3ec" text-anchor="middle">THE DEAL</text>
+        <text id="seatname" x="230" y="190" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.5" fill="#f6f3ec" text-anchor="middle"></text>
       </svg>
       <div class="prow bot"><span>Eight Questions</span><span>Argued on the Record</span></div>
     </figure>
@@ -341,5 +359,15 @@
   </footer>
 
 </main>
+<script>
+(function(){
+  var out = document.getElementById('seatname');
+  if(!out) return;
+  document.querySelectorAll('.plate .seat').forEach(function(s){
+    s.addEventListener('mouseenter', function(){ out.textContent = s.dataset.n; });
+    s.addEventListener('mouseleave', function(){ out.textContent = ''; });
+  });
+})();
+</script>
 </body>
 </html>
