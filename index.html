@@ -28,15 +28,46 @@
     --serif:'Source Serif 4',Georgia,serif; --display:'Newsreader',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62;padding:0 24px;}
-  main{max-width:720px;margin:0 auto;padding:64px 0 72px;}
+  main{max-width:1080px;margin:0 auto;padding:48px 0 72px;}
+  main section{display:grid;grid-template-columns:190px 1fr;column-gap:48px;align-items:start;}
+  main section>h2{margin-bottom:0;padding-top:5px;font-size:14px;line-height:1.5;}
+  main section>h2 .sn{display:block;font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-0.01em;color:var(--ink);margin:0 0 8px;}
+  .sc{min-width:0;}
+  .sc p{max-width:66ch;}
 
-  .mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:40px;}
-  .mast .nm{font-family:var(--display);font-weight:700;letter-spacing:0.16em;font-size:15px;text-transform:uppercase;}
-  .mast .no{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--oxblood);text-transform:uppercase;}
+  .hero-wrap{max-width:1080px;margin:0 auto;padding-top:36px;}
+  .mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:12px;}
+  .mast .nm{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-0.01em;}
+  .mast .nm .vc{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--oxblood);font-weight:500;}
+  .mast nav a{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;margin-left:26px;}
+  .mast nav a:hover{color:var(--oxblood);}
+  .mast nav a.hot{color:var(--oxblood);}
 
-  h1{font-family:var(--display);font-weight:700;font-size:34px;line-height:1.15;letter-spacing:-0.01em;margin-bottom:14px;}
-  .sell{font-family:var(--display);font-style:italic;font-weight:500;font-size:21px;color:var(--ink);}
+  .hero{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;padding:56px 0 52px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+  h1{font-family:var(--display);font-weight:700;font-size:46px;line-height:1.1;letter-spacing:-0.015em;margin-bottom:18px;}
+  .desc{font-size:17px;color:var(--ink-soft);margin-bottom:16px;}
+  .sell{font-family:var(--display);font-style:italic;font-weight:500;font-size:20px;color:var(--oxblood);margin-bottom:26px;}
+  .btn{display:inline-block;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 22px;text-decoration:none;}
+  .btn:hover{background:var(--oxblood);color:var(--paper);}
+  .ghost{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--tag-border);margin-left:22px;}
+  .ghost:hover{color:var(--oxblood);}
+
+  .plate{border:1px solid var(--tag-border);background:var(--paper-2);padding:16px 20px 14px;}
+  .plate .prow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);}
+  .plate .prow.bot{border-top:1px solid var(--rule);padding-top:10px;margin-top:4px;color:var(--dim);}
+  .plate svg{display:block;width:100%;height:auto;margin:10px 0 8px;}
+
+  .pbar{display:flex;height:8px;max-width:1080px;margin:0 auto;}
+  .pbar span{flex:1;}
+  .pbar .b-go{background:#2f5d3a;}
+  .pbar .b-goexp{background:var(--gold);}
+  .pbar .b-nogo{background:var(--oxblood);}
+  .pbar .b-cannot{background:#5a544a;opacity:.22;}
+  .hed{font-family:var(--display);font-weight:700;font-size:27px;line-height:1.18;letter-spacing:-0.01em;color:var(--ink);margin-bottom:12px;}
+  h2 .sn{color:var(--dim);margin-right:10px;}
 
   .card{display:flex;gap:24px;align-items:flex-start;border:1px solid var(--ink);padding:20px 22px;margin:26px 0;background:var(--paper-2);}
   .card .num{font-family:var(--display);font-weight:800;font-size:72px;line-height:0.82;letter-spacing:-0.03em;color:var(--oxblood);}
@@ -53,8 +84,30 @@
   p{margin-bottom:16px;}
   strong{font-weight:600;}
   .verdict{border-left:3px solid var(--gold);background:var(--paper-2);padding:14px 18px;margin:22px 0;font-size:15px;color:var(--ink-soft);}
+  .qs{display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;margin:0 0 20px;}
+  .qs div{font-size:16px;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:9px;}
+  .qs span{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--gold);display:block;margin-bottom:3px;}
+  .seats{display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;margin:0 0 20px;}
+  .seats div{font-size:16px;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:9px;}
+  .seats span{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--oxblood);display:block;margin-bottom:3px;font-weight:600;}
+  .postures{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 8px;}
+  .postures div{border-top:3px solid;padding-top:9px;font-family:var(--display);font-weight:700;font-size:16px;line-height:1.22;}
+  .p-go{border-color:#2f5d3a;color:#2f5d3a;}
+  .p-goexp{border-color:var(--gold);color:var(--gold);}
+  .p-nogo{border-color:var(--oxblood);color:var(--oxblood);}
+  .p-cannot{border-color:#5a544a;color:#5a544a;}
+  .card.case .posture{font-size:21px;}
+  .card.case .co{font-family:var(--display);font-weight:700;font-size:20px;display:block;margin:3px 0 1px;}
+  .card.case p{font-size:15px;color:var(--ink-soft);margin:0 0 10px;}
+  .card.case-goexp .num,.card.case-goexp .posture{color:var(--gold);}
+  .card.case-goexp{border-left:3px solid var(--gold);}
+  .card.case-nogo{border-left:3px solid var(--oxblood);}
+  .band{background:var(--paper-2);border:1px solid var(--tag-border);padding:26px 28px;}
+  @media(max-width:560px){ .qs{grid-template-columns:1fr;} .seats{grid-template-columns:1fr;} .postures{grid-template-columns:1fr 1fr;} .hed{font-size:23px;} }
   .proof strong{font-family:var(--display);}
-  .samples{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+  .samples{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+  .cases{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0;}
+  .cases .card{margin:0;}
   .samples a{display:block;border:1px solid var(--tag-border);border-radius:3px;padding:13px 16px;text-decoration:none;color:var(--ink);background:var(--paper-2);}
   .samples a:hover{border-color:var(--ink);}
   .samples a b{font-family:var(--display);font-weight:600;font-size:16px;display:block;margin-bottom:2px;}
@@ -67,84 +120,214 @@
   .cta a{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--oxblood);border:1px solid var(--oxblood);padding:11px 16px;display:inline-block;text-decoration:none;}
   .cta a:hover{background:var(--oxblood);color:var(--paper);}
   a{color:var(--oxblood);}
-  footer{margin-top:48px;padding-top:16px;border-top:2px solid var(--ink);}
+  .pbar.foot{margin-top:64px;}
+  footer{margin-top:24px;}
   footer p{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--dim);margin-bottom:8px;}
-  @media(max-width:560px){ main{padding:40px 24px 48px;} h1{font-size:27px;} .card{flex-direction:column;gap:12px;} .card .num{font-size:60px;} }
+  @media(max-width:900px){ .hero{grid-template-columns:1fr;gap:36px;padding:44px 0 44px;} h1{font-size:36px;} main section{display:block;} main section>h2{margin-bottom:14px;padding-top:0;} .qs{grid-template-columns:1fr 1fr;} .seats{grid-template-columns:1fr 1fr;} .samples{grid-template-columns:1fr;} .cases{grid-template-columns:1fr;} }
+  @media(max-width:560px){ main{padding:36px 0 48px;} h1{font-size:30px;} .card{flex-direction:column;gap:12px;} .card .num{font-size:60px;} .mast nav a{display:none;} .mast nav a.hot{display:inline;margin-left:0;} .ghost{display:inline-block;margin:14px 0 0;} .qs{grid-template-columns:1fr;} .seats{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
+
+<div class="hero-wrap">
+  <div class="mast">
+    <span class="nm">On the Table <span class="vc">&middot; VC</span></span>
+    <nav>
+      <a href="#seats">The Seats</a><a href="#questions">The Questions</a><a href="#proof">The Proof</a><a class="hot" href="#offer">Request a Memo</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <header>
+      <div class="eyebrow">Adversarial Diligence &middot; Pre-Decision</div>
+      <h1>Before conviction becomes capital, put the deal on trial.</h1>
+      <p class="desc">A pre-decision red team memo for investors and acquirers. You name a deal you are seriously considering. We return an independent, adversarial second opinion, built from the dated public record.</p>
+      <p class="sell">Your AI agrees with you. Ours is required to disagree.</p>
+      <p><a class="btn" href="#offer">Request a Memo</a><a class="ghost" href="#samples">Read a Sample Verdict</a></p>
+    </header>
+
+    <figure class="plate">
+      <div class="prow"><span>Fig. 1 &middot; The Room</span><span style="color:var(--dim);">Top-Down</span></div>
+      <svg viewBox="0 0 460 306" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top-down diagram of a boardroom table: six numbered seats around one deal">
+        <!-- backrests -->
+        <rect x="158" y="16" width="44" height="7" rx="3" fill="#1a1815"/>
+        <rect x="258" y="16" width="44" height="7" rx="3" fill="#1a1815"/>
+        <rect x="415" y="131" width="7" height="44" rx="3" fill="#1a1815"/>
+        <rect x="38" y="131" width="7" height="44" rx="3" fill="#1a1815"/>
+        <rect x="158" y="283" width="44" height="7" rx="3" fill="#1a1815"/>
+        <rect x="258" y="283" width="44" height="7" rx="3" fill="#1a1815"/>
+        <!-- seats -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="12" fill="#f6f3ec" text-anchor="middle">
+          <rect x="158" y="29" width="44" height="36" rx="4" fill="#1a1815"/><text x="180" y="52">01</text>
+          <rect x="258" y="29" width="44" height="36" rx="4" fill="#1a1815"/><text x="280" y="52">02</text>
+          <rect x="373" y="135" width="44" height="36" rx="4" fill="#1a1815"/><text x="395" y="158">03</text>
+          <rect x="43" y="135" width="44" height="36" rx="4" fill="#1a1815"/><text x="65" y="158">06</text>
+          <rect x="258" y="241" width="44" height="36" rx="4" fill="#1a1815"/><text x="280" y="264">04</text>
+          <rect x="158" y="241" width="44" height="36" rx="4" fill="#1a1815"/><text x="180" y="264">05</text>
+        </g>
+        <!-- table -->
+        <rect x="112" y="75" width="236" height="156" fill="#7a2e2e"/>
+        <rect x="124" y="87" width="212" height="132" fill="none" stroke="#f6f3ec" stroke-width="1" opacity="0.85"/>
+        <line x1="196" y1="163" x2="264" y2="163" stroke="#f6f3ec" stroke-width="1" opacity="0.85"/>
+        <text x="230" y="150" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="3" fill="#f6f3ec" text-anchor="middle">THE DEAL</text>
+      </svg>
+      <div class="prow bot"><span>Six Seats &middot; One Deal</span><span>Argued on the Record</span></div>
+    </figure>
+  </div>
+</div>
+
+<div class="pbar"><span class="b-go"></span><span class="b-goexp"></span><span class="b-nogo"></span><span class="b-cannot"></span></div>
+
 <main>
 
-  <div class="mast"><span class="nm">On The Table</span><span class="no">Go / No-Go Diligence Memos</span></div>
-
-  <header>
-    <h1>Before conviction becomes capital, put the deal on trial.</h1>
-    <p class="sell">Your AI agrees with you. Ours is required to disagree.</p>
-  </header>
-
   <section style="margin-top:40px;">
-    <h2>The problem</h2>
-    <p>Most AI does not challenge conviction. It organizes it. Every investor now has a research chatbot open; ask it about a deal you are excited about and it catches your excitement and hands it back to you with citations. That is not diligence. That is agreement with formatting.</p>
+    <h2><span class="sn">01</span>The problem</h2>
+    <div class="sc">
+    <p class="hed">A second opinion you control is not a second opinion.</p>
+    <p>Every investor now has a research chatbot open, and it is very good at building the case for a deal you already like. The obvious fix is to prompt it for the bear case. But a bear case you commission from your own AI answers to you: if it stings, you can soften the prompt, run it again, or close the tab, and no one will ever know.</p>
+    <p>Dissent only counts when it has standing: rules that cannot be bent mid-argument, a checker who does not report to you, and a record that cannot be edited after the fact. Nothing in the current stack provides that.</p>
+    </div>
   </section>
 
   <hr>
 
   <section>
-    <h2>The method</h2>
-    <p>Six seats read the same evidence file independently: the Skeptic, the Growth Partner, the Customer-Truth Advisor, the Operator, the Timing Analyst, and a Red Team assigned against whatever the consensus turns out to be. They cannot see each other's work. Then they argue, on the record, and every seat must name the opposing argument it cannot beat. A managing adjudication weighs the surviving arguments, never the votes.</p>
-    <p>Then the memo has to survive an audit it did not write: a second AI from a different company checks every source, every date, and every quote before the memo can ship. Every factual claim carries a link and a date. What survives is not an answer. It is a verdict.</p>
-    <div class="verdict"><strong>Every verdict states:</strong> a posture (one of four, from GO to CANNOT READ RESPONSIBLY), a confidence number, the named experiments with kill thresholds that condition it, the strongest surviving argument against it, printed in full, and the two or three observable facts that would change the call. And every memo covers the ground an investment committee would demand: the category and who else is in it, the position the company can actually carve and for whom, and the size of the prize, all from dated sources.</div>
-    <p style="font-family:var(--mono);font-size:12px;letter-spacing:0.06em;"><a href="different.html">Why this is not another research tool &rarr;</a></p>
+    <h2><span class="sn">02</span>When to use it</h2>
+    <div class="sc">
+    <p class="hed">After the deal has momentum. Before it has money.</p>
+    <p>Use it after a deal has a sponsor and genuine interest inside your firm, and before the investment committee turns that interest into conviction. That is the last cheap moment to be wrong. Every week after it, the same doubts get more expensive: diligence dollars go out, the founder's story hardens, and momentum starts doing the arguing.</p>
+    <p>The point is not to replace diligence. The point is to aim it before you spend it.</p>
+    </div>
   </section>
 
   <hr>
 
-  <section class="proof">
-    <h2>The proof</h2>
-    <p>Before you trust a verdict on a live deal, you should see the method work where the answer is known. These are backtests. We take a famous deal, freeze the clock the day before the money moved, and hand the table only what was public before that date. Not one source in the file postdates the decision. Then the seats argue it out as if the wire were tomorrow. Here is what a verdict looks like:</p>
-    <div class="card">
-      <div class="num">75<small>Confidence: 75 of 100</small></div>
+  <section>
+    <h2 id="seats"><span class="sn">03</span>The seats</h2>
+    <div class="sc">
+    <p class="hed">A seat is a reviewer with a fixed mandate.</p>
+    <p>Six sit at every table:</p>
+    <div class="seats">
+      <div><span>The Operator</span>Argues the best version of the deal. The table needs a designated optimist, or it is a firing squad.</div>
+      <div><span>The Skeptic</span>Hunts for the fatal flaw: where does this die?</div>
+      <div><span>The Customer-Truth Advisor</span>Speaks only for the customer. Painkiller or vitamin, stated or revealed.</div>
+      <div><span>The Growth Partner</span>Tests whether the math works and the team can execute.</div>
+      <div><span>The Timing Analyst</span>Asks whether the wave is real, and whether it is now.</div>
+      <div><span>The Red Team</span>Assigned to attack whatever the rest start to agree on.</div>
+    </div>
+    <p>Each seat reads the same evidence file without seeing the others' notes. Then they argue, on the record, and every seat must name the opposing argument it cannot beat. A managing adjudication weighs the surviving arguments, never the votes.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2 id="questions"><span class="sn">04</span>The questions</h2>
+    <div class="sc">
+    <p class="hed">Eight questions the deal must survive.</p>
+    <p>Together the seats must answer them on the record, each question owned by the seat whose mandate is to press it:</p>
+    <div class="qs">
+      <div><span>01</span>Why could this be big?</div>
+      <div><span>02</span>What are we pretending not to see?</div>
+      <div><span>03</span>Does anyone really care?</div>
+      <div><span>04</span>Is this meaningfully different?</div>
+      <div><span>05</span>Who already owns the customer's default?</div>
+      <div><span>06</span>Can they actually execute?</div>
+      <div><span>07</span>Why now?</div>
+      <div><span>08</span>What would make all of us wrong?</div>
+    </div>
+    <p>Then the memo has to survive an audit it did not write: a second AI from a different company checks every source, every date, and every quote before the memo can ship. Every factual claim carries a link and a date. What survives is not an answer. It is a verdict.</p>
+    <p style="font-family:var(--mono);font-size:12px;letter-spacing:0.06em;"><a href="different.html">Why this is not another research tool &rarr;</a></p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2><span class="sn">05</span>The verdict</h2>
+    <div class="sc">
+    <p class="hed">Not a summary. A posture.</p>
+    <div class="postures">
+      <div class="p-go">GO</div>
+      <div class="p-goexp">GO WITH EXPERIMENTS</div>
+      <div class="p-nogo">NO-GO AS FRAMED</div>
+      <div class="p-cannot">CANNOT READ RESPONSIBLY</div>
+    </div>
+    <div class="verdict"><strong>Every memo ends in one of these four calls. Each verdict states:</strong> a confidence number, the named experiments with kill thresholds that condition it, the strongest surviving argument against it, printed in full, and the two or three observable facts that would change the call. And every memo covers the ground an investment committee would demand: the category and who else is in it, the position the company can actually carve and for whom, and the size of the prize, all from dated sources.</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="proof" id="proof">
+    <h2><span class="sn">06</span>The proof</h2>
+    <div class="sc">
+    <p class="hed">Tested where the outcome is already known.</p>
+    <p>These are backtests. We take a famous deal, freeze the clock the day before the money moved, and hand the table only what was public before that date. Not one source in the file postdates the decision. Then the seats argue it out as if the wire were tomorrow. Here is what the table said:</p>
+    <div class="cases">
+    <div class="card case case-goexp">
+      <div class="num">70<small>Confidence: 70 of 100</small></div>
       <div>
-        <div class="hold">The Holding</div>
-        <div class="posture">No-Go As Framed</div>
-        <div class="gloss">We would not invest on the terms as presented.</div>
-        <div class="tags"><span class="tag">64 sources</span><span class="tag">date-locked</span><span class="tag">audited by a second AI</span></div>
-        <div class="cap">Sample verdict &middot; Olive AI, Inc. &middot; decided June 30, 2021</div>
+        <div class="cap">Case 1 &middot; decided January 16, 2017</div>
+        <span class="co">Zoom</span>
+        <div class="posture">Go With Experiments</div>
+        <p>The day before Sequoia wired $100 million at a $1 billion valuation, the consensus said video conferencing was solved and crowded. Using only sources dated before that day, 114 of them, linked, the table named the one number that decided the case.</p>
+        <div class="tags"><span class="tag">114 dated sources</span><span class="tag">no source postdates the decision</span><span class="tag">audited by a second AI</span></div>
       </div>
     </div>
-    <p><strong>Zoom, decision date January 16, 2017.</strong> The day before Sequoia wired $100 million at a $1 billion valuation, the consensus said video conferencing was solved and crowded. Using only sources dated before that day, 114 of them, linked, the table said GO WITH EXPERIMENTS at confidence 70, and named the one number that decided the case.</p>
-    <p><strong>Olive AI, decision date June 30, 2021.</strong> The day before the $400 million round at a $4 billion valuation: NO-GO AS FRAMED at confidence 75, built from 64 dated public sources that all existed before the wire.</p>
+    <div class="card case case-nogo">
+      <div class="num">75<small>Confidence: 75 of 100</small></div>
+      <div>
+        <div class="cap">Case 2 &middot; decided June 30, 2021</div>
+        <span class="co">Olive AI</span>
+        <div class="posture">No-Go As Framed</div>
+        <p>The day before the $400 million round at a $4 billion valuation, built from 64 dated public sources that all existed before the wire.</p>
+        <div class="tags"><span class="tag">64 dated sources</span><span class="tag">no source postdates the decision</span><span class="tag">audited by a second AI</span></div>
+      </div>
+    </div>
+    </div>
     <p>The claim is not foresight. Backtests are run under a hard rule that no source may postdate the decision date, and each memo carries that caveat in print. The claim is that the evidence was on the table. Backtests do not predict the future. They prove the process.</p>
+    </div>
   </section>
 
   <hr>
 
   <section>
-    <h2>See a sample memo</h2>
+    <h2 id="samples"><span class="sn">07</span>See a sample memo</h2>
+    <div class="sc">
     <p>Read one end to end: the verdict, the dissent printed in full, and every claim carrying a dated source. Both are method demonstrations, not predictions.</p>
     <div class="samples">
       <a class="s-nogo" href="olive-ai.html"><b>Olive AI, Inc.</b><span><i class="pos-nogo" style="font-style:normal;">No-Go As Framed</i> &middot; 75 &middot; PDF inside</span></a>
       <a class="s-goexp" href="zoom.html"><b>Zoom Video Communications</b><span><i class="pos-goexp" style="font-style:normal;">Go With Experiments</i> &middot; 70 &middot; PDF inside</span></a>
     </div>
+    </div>
   </section>
 
   <hr>
 
-  <section>
-    <h2>Put a company on the table</h2>
-    <p>Name a company you are seriously considering. No NDA, you send us nothing. You get the full memo, built from the dated public record: $2,500, waived for a small number of founding readers in exchange for twenty minutes telling us what is missing.</p>
+  <section class="band" id="offer">
+    <h2><span class="sn">08</span>Put a company on the table</h2>
+    <div class="sc">
+    <p class="hed">Bring us a deal you are seriously considering.</p>
+    <p>No NDA, you send us nothing. You get the full memo, built from the dated public record: $2,500, waived for a small number of founding readers in exchange for twenty minutes telling us what is missing.</p>
     <p>Prefer not to name a live deal? Give us one you already decided, yours or anyone's, and we will show you what the table would have said the day before the wire.</p>
     <p>Every memo ends with the experiments only insider access can run. Running them is the engagement that follows, if the memo earns it.</p>
     <p class="cta"><a href="mailto:steve@onthetable.vc?subject=Founding%20reader%3A%20a%20company%20to%20put%20on%20the%20table">Name a company &middot; steve@onthetable.vc</a></p>
+    </div>
   </section>
 
   <hr>
 
   <section>
-    <h2>After the memo</h2>
-    <p>For retained readers, the memo is the output, not the product. The product is a private evidence desk built for your firm alone: your thesis, your process, your past deals and passes, the lines you have decided you will not cross, indexed into a siloed library that never touches anyone else's. Over time the table stops arguing against the public record alone and starts arguing against your own history and your own rules: the pass that got away, the pattern you swore you would not repeat.</p>
+    <h2><span class="sn">09</span>After the memo</h2>
+    <div class="sc">
+    <p class="hed">The memo is the output. The desk is the product.</p>
+    <p>For retained firms we build a private evidence desk: your thesis, your process, your past deals and passes, the lines you have decided you will not cross, indexed into a siloed library that never touches anyone else's. Over time the table stops arguing against the public record alone and starts arguing against your own history and your own rules: the pass that got away, the pattern you swore you would not repeat.</p>
     <p>That library compounds with every memo. And it is yours: if you leave, it leaves with you.</p>
+    </div>
   </section>
+
+  <div class="pbar foot"><span class="b-go"></span><span class="b-goexp"></span><span class="b-nogo"></span><span class="b-cannot"></span></div>
 
   <footer>
     <p>Memos are decision support, not investment advice. Every decision remains entirely the reader's.</p>
